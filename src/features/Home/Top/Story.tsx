@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IStory } from "../../../types/types";
 
 const Container = styled.li`
   display: flex;
@@ -41,18 +42,20 @@ const UserName = styled.span``;
 const UserPoint = styled.span``;
 const CreatedAt = styled.span``;
 
-const Story = () => {
+interface Props {
+  story?: IStory;
+  index: number;
+}
+
+const Story = ({ story, index }: Props) => {
   return (
     <Container>
-      <Rank>1</Rank>
+      <Rank>{index + 1}</Rank>
       <StoryInfo>
-        <StoryTitle>
-          I built a system that takes pictures of all the airplanes that fly
-          over my asdhgklhlghjklwejgdfjksdjfweigjweigjpw gkwerogkwpokfoew
-        </StoryTitle>
+        <StoryTitle>{story?.title}</StoryTitle>
         <UserInfo>
-          <UserName>Kristin Watson</UserName>
-          <UserPoint>100point</UserPoint>
+          <UserName>{story?.by}</UserName>
+          <UserPoint>{story?.score} point</UserPoint>
           <CreatedAt>2 minutes ago</CreatedAt>
         </UserInfo>
       </StoryInfo>
