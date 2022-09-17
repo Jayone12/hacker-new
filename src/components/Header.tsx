@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ReactComponent as Logo } from "../assets/images/logo.svg";
 import { ReactComponent as ThemeIcon } from "../assets/images/theme_icon.svg";
 import { ReactComponent as AboutIcon } from "../assets/images/about_icon.svg";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Container = styled.header``;
 
@@ -56,10 +56,12 @@ const Menu = styled.li`
   a {
     width: 100%;
     padding: 10px;
+
     &:hover {
       border-bottom: 3px solid #ed702d;
       color: ${({ theme }) => theme.fontColor};
     }
+
     &.active {
       border-bottom: 3px solid #ed702d;
       color: ${({ theme }) => theme.fontColor};
@@ -89,22 +91,22 @@ const Header = ({ handleThemeMode }: Props) => {
       <Nav>
         <MenuContainer>
           <Menu>
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </Menu>
           <Menu>
-            <Link to="/top">Top</Link>
+            <NavLink to="/top">Top</NavLink>
           </Menu>
           <Menu>
-            <Link to="/new">New</Link>
+            <NavLink to="/new">New</NavLink>
           </Menu>
           <Menu>
-            <Link to="/show">Show</Link>
+            <NavLink to="/show">Show</NavLink>
           </Menu>
           <Menu>
-            <Link to="/ask">Ask</Link>
+            <NavLink to="/ask">Ask</NavLink>
           </Menu>
           <Menu>
-            <Link to="/job">Job</Link>
+            <NavLink to="/job">Job</NavLink>
           </Menu>
         </MenuContainer>
       </Nav>
