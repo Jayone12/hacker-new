@@ -15,13 +15,14 @@ const Container = styled.ul`
 
 interface Props {
   stories?: (IStory | undefined)[];
+  rank: number;
 }
 
-const Stories = ({ stories }: Props) => {
+const Stories = ({ stories, rank }: Props) => {
   return (
     <Container>
       {stories?.map((story, index) => (
-        <Story story={story} index={index} key={story?.id} />
+        <Story story={story} index={rank + index} key={story?.id} />
       ))}
     </Container>
   );
