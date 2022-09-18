@@ -50,7 +50,7 @@ interface Props {
 const Story = ({ story, index }: Props) => {
   return (
     <Container>
-      <Rank>{index + 1}</Rank>
+      <Rank>{index}</Rank>
       <StoryInfo>
         <StoryTitle>{story?.title}</StoryTitle>
         <UserInfo>
