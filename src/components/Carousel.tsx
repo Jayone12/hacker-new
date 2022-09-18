@@ -6,6 +6,9 @@ const StyledSlider = styled(ReactSlick)`
     padding-bottom: 10px;
   }
   .slick-dots {
+    li {
+      margin: 0;
+    }
     button {
       &:before {
         color: #b7b7b7;
