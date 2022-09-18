@@ -5,14 +5,18 @@ import { ReactComponent as Clock } from "../../../assets/images/clock_icon.svg";
 import Carousel from "../../../components/Carousel";
 import Stories from "../../../features/Home/Top/Stories";
 import { useEffect, useState } from "react";
+import BorderLine from "../../../components/BorderLine";
 
-const TopStoriesContainer = styled.div``;
+const TopStoriesContainer = styled.div`
+  position: relative;
+  height: 600px;
+`;
 
 const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 30px;
+  margin-top: 40px;
   padding: 0 20px;
 `;
 
@@ -34,11 +38,11 @@ const StoriesContainer = styled.div`
 
 const TopStories = () => {
   const { isLoading, data } = useTopDataFetch();
+  const [refreshTime, setRefreshTime] = useState("");
 
-  const [refreshTime, setRefreshTime] = useState("00");
-  const getRefreshHour = () => {
+  useEffect(() => {
     setRefreshTime(new Date().getHours() + "");
-    setInterval(() => {
+    const getHour = setInterval(() => {
       const time = new Date();
       const hour = time.getHours();
       const minutes = time.getSeconds();
@@ -50,10 +54,10 @@ const TopStories = () => {
         }
       }
     }, 1000);
-  };
 
-  useEffect(() => {
-    getRefreshHour();
+    return () => {
+      clearInterval(getHour);
+    };
   }, []);
 
   return (
@@ -70,14 +74,15 @@ const TopStories = () => {
       <StoriesContainer>
         {!isLoading ? (
           <Carousel>
-            <Stories stories={data?.slice(0, 5)} />
-            <Stories stories={data?.slice(5, 10)} />
-            <Stories stories={data?.slice(10, 15)} />
+            <Stories stories={data?.slice(0, 5)} rank={1} />
+            <Stories stories={data?.slice(5, 10)} rank={6} />
+            <Stories stories={data?.slice(10, 15)} rank={11} />
           </Carousel>
         ) : (
           <span>Loding...</span>
         )}
       </StoriesContainer>
+      <BorderLine />
     </TopStoriesContainer>
   );
 };
