@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg";
 import BorderLine from "../../../components/BorderLine";
-import Stories from "./Stories";
+import Users from "./Users";
 
 const Container = styled.div`
   position: relative;
@@ -37,7 +37,7 @@ const TodayUsers = () => {
         </Title>
       </TitleContainer>
       <StoriesContainer>
-        <Stories />
+        <Users />
       </StoriesContainer>
       <BorderLine />
     </Container>
