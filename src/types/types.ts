@@ -9,3 +9,10 @@ export interface IStory {
   type: string;
   url: string;
 }
+
+export interface IUser {
+  created: number;
+  id: string;
+  karma: number;
+  submitted: number[];
+}
