@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as UserIcon } from "../../../assets/images/user_icon.svg";
-import { IStory } from "../../../types/types";
+import { diffTime } from "../../../utils/diffTime";
 
 const Container = styled.li``;
 
@@ -18,8 +18,6 @@ const StoryTitle = styled.h4`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  width: 275px;
-  height: 40px;
   font-size: 16px;
   font-weight: bold;
   line-height: 20px;
@@ -39,29 +37,24 @@ const UserName = styled.span`
   margin-left: 5px;
 `;
 
-const Hr = styled.hr`
-  border: 1px solid #b7b7b7;
-  margin: 16px 0;
-`;
-
 interface Props {
-  story?: IStory;
-  index: number;
+  by?: string;
+  title?: string;
+  time?: number;
+  url?: string;
 }
 
-const Story = () => {
+const Story = ({ by, title, time, url }: Props) => {
   return (
     <Container>
-      <CreateAt>2 minutes ago</CreateAt>
+      <CreateAt>{diffTime(time!)}</CreateAt>
       <StoryTitle>
-        TikTok Japan pays influencers, without informing viewers, to spread
-        tweet videos
+        <a href={url}>{title}</a>
       </StoryTitle>
       <User>
         <UserIcon />
-        <UserName>Kristin Watson</UserName>
+        <UserName>{by}</UserName>
       </User>
-      <Hr />
     </Container>
   );
 };
