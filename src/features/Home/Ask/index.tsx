@@ -29,8 +29,6 @@ const Refresh = styled.div`
 `;
 
 const StoriesContainer = styled.div`
-  position: relative;
-  height: 520px;
   padding-bottom: 10px;
 `;
 
@@ -49,7 +47,7 @@ const AskStories = () => {
         </Refresh>
       </TitleContainer>
       <StoriesContainer>
-        <Stories stories={stories} />
+        {isLoading ? <span>Loading...</span> : <Stories stories={stories} />}
       </StoriesContainer>
       <BorderLine />
     </Container>
