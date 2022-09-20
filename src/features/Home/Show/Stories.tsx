@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import useShowDataFetch from "./useShowDataFetch";
+import { IStory } from "../../../types/types";
 import Story from "./Story";
 
 const Container = styled.ul`
@@ -10,19 +10,16 @@ const Container = styled.ul`
   padding-left: 20px;
 `;
 
-const Stories = () => {
-  const { data: stories, isLoading } = useShowDataFetch();
+interface Props {
+  stories: (IStory | undefined)[] | undefined;
+}
+
+const Stories = ({ stories }: Props) => {
   return (
     <Container>
-      {isLoading ? (
-        <span>Loading...</span>
-      ) : (
-        <>
-          {stories?.map((story) => (
-            <Story key={story?.id} {...story} />
-          ))}
-        </>
-      )}
+      {stories?.map((story) => (
+        <Story key={story?.id} {...story} />
+      ))}
     </Container>
   );
 };

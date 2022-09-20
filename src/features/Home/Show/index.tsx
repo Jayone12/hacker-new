@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import useShowDataFetch from "./useShowDataFetch";
 import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg";
 import { ReactComponent as Update } from "../../../assets/images/update_icon.svg";
 import BorderLine from "../../../components/BorderLine";
@@ -36,6 +37,8 @@ const StoriesContainer = styled.div`
 `;
 
 const ShowStories = () => {
+  const { data: stories, isLoading, refetch } = useShowDataFetch();
+
   return (
     <Container>
       <TitleContainer>
@@ -43,13 +46,13 @@ const ShowStories = () => {
           Today's Show <Arrow />
         </Title>
         <Refresh>
-          {/* <button onClick={() => refetch()}> */}
-          <Update />
-          {/* </button> */}
+          <button onClick={() => refetch()}>
+            <Update />
+          </button>
         </Refresh>
       </TitleContainer>
       <StoriesContainer>
-        <Stories />
+        <Stories stories={stories} />
       </StoriesContainer>
       <BorderLine />
     </Container>
