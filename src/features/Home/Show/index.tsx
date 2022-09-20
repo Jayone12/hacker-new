@@ -52,7 +52,7 @@ const ShowStories = () => {
         </Refresh>
       </TitleContainer>
       <StoriesContainer>
-        <Stories stories={stories} />
+        {isLoading ? <span>Loading</span> : <Stories stories={stories} />}
       </StoriesContainer>
       <BorderLine />
     </Container>
