@@ -80,3 +80,14 @@ export const getAskStories = async () => {
     console.log("Error while getting list of stories.");
   }
 };
+
+export const getJobStories = async () => {
+  try {
+    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
+      await axios.get(`${BASE_URL}/jobstories.json`);
+    const stories = await Promise.all(storyIds.slice(0, 5).map(getStory));
+    return stories;
+  } catch {
+    console.log("Error while getting list of stories.");
+  }
+};
