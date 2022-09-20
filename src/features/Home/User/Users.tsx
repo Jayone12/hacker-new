@@ -19,8 +19,8 @@ const Users = () => {
         <span>Loading...</span>
       ) : (
         <>
-          {bestUsers?.map((user) => (
-            <User key={user?.id} {...user} />
+          {bestUsers?.map((user, index) => (
+            <User key={user?.id} {...user} index={index} />
           ))}
         </>
       )}
