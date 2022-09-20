@@ -79,13 +79,14 @@ interface Props {
   id?: string;
   karma?: number;
   created?: number;
+  index: number;
 }
 
-const User = ({ id, karma, created }: Props) => {
+const User = ({ id, karma, created, index }: Props) => {
   return (
     <Container>
       <RankWrapper>
-        <Rank>1</Rank>
+        <Rank>{index + 1}</Rank>
         Today's User
       </RankWrapper>
       <UserName>{id}</UserName>
