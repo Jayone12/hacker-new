@@ -84,6 +84,7 @@ const Comment = styled.div`
   font-size: 12px;
   display: flex;
   align-items: center;
+  color: #ed702d;
   svg {
     width: 12px;
     margin-right: 5px;
