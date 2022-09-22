@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as UserIcon } from "../assets/images/user_icon.svg";
+import { ReactComponent as CommentIcon } from "../assets/images/comment_icon.svg";
 import { diffTime } from "../utils/diffTime";
 
 const Container = styled.li`
@@ -21,6 +22,7 @@ const StoryInfo = styled.div`
   align-items: center;
   font-size: 12px;
   margin-top: 20px;
+  position: relative;
 `;
 
 const User = styled.div`
@@ -33,10 +35,25 @@ const User = styled.div`
 
 const Score = styled.div`
   margin-left: 10px;
+  color: #949494;
 `;
 
 const CreatedAt = styled.div`
   margin-left: 10px;
+  color: #949494;
+`;
+
+const Comment = styled.div`
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  color: #ed702d;
+  svg {
+    width: 12px;
+    margin-right: 5px;
+  }
 `;
 
 interface Props {
@@ -44,9 +61,10 @@ interface Props {
   title?: string;
   score?: number;
   time?: number;
+  kids?: number[];
 }
 
-const StoryListLayout = ({ by, title, score, time }: Props) => {
+const StoryListLayout = ({ by, title, score, time, kids }: Props) => {
   return (
     <Container>
       <Title>{title}</Title>
@@ -56,6 +74,10 @@ const StoryListLayout = ({ by, title, score, time }: Props) => {
         </User>
         <Score>{score} points</Score>
         <CreatedAt>{diffTime(time!)}</CreatedAt>
+        <Comment>
+          <CommentIcon />
+          {kids ? <>{kids!.length}</> : 0}
+        </Comment>
       </StoryInfo>
     </Container>
   );
