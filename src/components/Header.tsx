@@ -94,7 +94,7 @@ const Header = ({ handleThemeMode }: Props) => {
             <NavLink to="/">Home</NavLink>
           </Menu>
           <Menu>
-            <NavLink to="/top">Top</NavLink>
+            <NavLink to={"/top/post"}>Top</NavLink>
           </Menu>
           <Menu>
             <NavLink to="/new">New</NavLink>
