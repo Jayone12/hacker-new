@@ -118,7 +118,7 @@ const Story = ({ by, score, title, time, url, kids }: Props) => {
           <UserIcon /> {by}
         </User>
         <Comment>
-          <CommentIcon /> {kids!.length}
+          <CommentIcon /> {kids ? kids!.length : 0}
         </Comment>
       </UserInfo>
     </Container>
