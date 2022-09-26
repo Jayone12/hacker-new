@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ReactComponent as UserIcon } from "../assets/images/user_icon.svg";
 import { ReactComponent as CommentIcon } from "../assets/images/comment_icon.svg";
 import { diffTime } from "../utils/diffTime";
+import domainFromUrl from "../utils/domainFromUrl";
 
 const Container = styled.li`
   background-color: ${({ theme }) => theme.storyBg};
@@ -11,7 +12,16 @@ const Container = styled.li`
   margin-top: 20px;
 `;
 
+const Url = styled.span`
+  font-size: 10px;
+  color: #ed702d;
+  padding: 3px 5px;
+  border-radius: 20px;
+  background-color: #fff;
+`;
+
 const Title = styled.h4`
+  margin-top: 10px;
   font-size: 16px;
   color: ${({ theme }) => theme.fontColor};
   line-height: 24px;
@@ -62,11 +72,13 @@ interface Props {
   score?: number;
   time?: number;
   kids?: number[];
+  url?: string;
 }
 
-const StoryListLayout = ({ by, title, score, time, kids }: Props) => {
+const StoryListLayout = ({ by, title, score, time, kids, url }: Props) => {
   return (
     <Container>
+      {url && <Url>{domainFromUrl(url!)}</Url>}
       <Title>{title}</Title>
       <StoryInfo>
         <User>
