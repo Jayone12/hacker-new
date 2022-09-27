@@ -17,26 +17,6 @@ const Banner = styled.div`
   margin-top: 2px;
 `;
 
-const Kinds = styled.div`
-  background-color: ${({ theme }) => theme.storyBg};
-  border-radius: 100px;
-  padding: 4px 5px;
-`;
-
-const Button = styled.button`
-  a {
-    display: block;
-    width: 170px;
-    padding: 12px 0;
-    font-size: 12px;
-    text-align: center;
-    border-radius: 100px;
-    &.active {
-      background-color: #ed702d;
-    }
-  }
-`;
-
 const New = () => {
   const [layout, handlechangeLayout] = useChangeLayout();
   const { limit, page, setPage, offset } = usePagination(1, 10);
