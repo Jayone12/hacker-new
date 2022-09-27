@@ -125,3 +125,25 @@ export const getNewStory = async (start: number, end: number) => {
     console.log("Error while getting list of stories.");
   }
 };
+
+export const getShowStory = async (start: number, end: number) => {
+  try {
+    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
+      await axios.get(`${BASE_URL}/showstories.json`);
+    const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
+    return stories;
+  } catch {
+    console.log("Error while getting list of stories.");
+  }
+};
+
+export const getAskStory = async (start: number, end: number) => {
+  try {
+    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
+      await axios.get(`${BASE_URL}/askstories.json`);
+    const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
+    return stories;
+  } catch {
+    console.log("Error while getting list of stories.");
+  }
+};
