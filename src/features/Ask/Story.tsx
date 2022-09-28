@@ -3,6 +3,7 @@ import BorderLine from "../../components/BorderLine";
 import { diffTime } from "../../utils/diffTime";
 import { ReactComponent as UserIcon } from "../../assets/images/user_icon.svg";
 import { ReactComponent as CommentIcon } from "../../assets/images/comment_icon.svg";
+import { Link } from "react-router-dom";
 
 const Container = styled.li`
   position: relative;
@@ -82,14 +83,17 @@ interface Props {
   score?: number;
   kids?: number[];
   time?: number;
+  id?: number;
 }
 
-const Story = ({ title, by, text, score, kids, time }: Props) => {
+const Story = ({ title, by, text, score, kids, time, id }: Props) => {
   return (
     <Container>
       <Title>
-        <Ask>{title!.match(/[\w\s]+\:/)}</Ask>
-        {title!.replace(/[\w\s]+\:/, "")}
+        <Link to={`item/${id}`}>
+          <Ask>{title!.match(/[\w\s]+\:/)}</Ask>
+          {title!.replace(/[\w\s]+\:/, "")}
+        </Link>
       </Title>
       {text && <Description dangerouslySetInnerHTML={{ __html: `${text}` }} />}
       <CreatedAt>{diffTime(time!)}</CreatedAt>
