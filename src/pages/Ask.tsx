@@ -3,7 +3,6 @@ import AskBanner from "../assets/images/ask_banner.png";
 import Pagination from "../components/Pagination";
 import useStoryFetch from "../features/Ask/useStoryFetch";
 import Stories from "../features/Ask/Stories";
-import useChangeLayout from "../hooks/useChangeLayout";
 import usePagination from "../hooks/usePagination";
 
 const Container = styled.section``;
@@ -15,7 +14,6 @@ const Banner = styled.div`
 `;
 
 const Ask = () => {
-  const [layout, handlechangeLayout] = useChangeLayout();
   const { limit, page, setPage, offset } = usePagination(1, 10);
   const { data: stories, isLoading } = useStoryFetch(
     offset,
