@@ -1,5 +1,5 @@
 import { ReactComponent as ClockIcon } from "../assets/images/clock_icon.svg";
-import { ReactComponent as UserIconBig } from "../assets/images/user_icon_big.svg";
+import { ReactComponent as UserIcon } from "../assets/images/user_icon.svg";
 import { FiChevronUp } from "react-icons/fi";
 import styled from "styled-components";
 import { useState } from "react";
@@ -13,7 +13,7 @@ const Container = styled.div<{ reComment: boolean }>`
 `;
 
 const CommentContianer = styled.div<{ reComment: boolean }>`
-  margin-top: 10px;
+  margin-bottom: 10px;
   padding-left: 10px;
   border-radius: 8px;
   background-color: ${(props) => props.reComment && `${props.theme.commentBg}`};
@@ -96,7 +96,7 @@ const Comment = ({ comment, reComment }: Props) => {
             <CommentHeader onClick={toggleHandler}>
               <CommentInfo>
                 <User>
-                  <UserIconBig width="20px" height="20px" />
+                  <UserIcon width="20px" height="20px" />
                   {story?.by}
                 </User>
                 <CreatedAt>
@@ -119,9 +119,9 @@ const Comment = ({ comment, reComment }: Props) => {
           {!isActive && (
             <>{story?.kids && <ReComment comments={story?.kids} />}</>
           )}
+          {!reComment && <Hr />}
         </Container>
       )}
-      {!reComment && <Hr />}
     </>
   );
 };
