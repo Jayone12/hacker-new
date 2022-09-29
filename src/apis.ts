@@ -3,7 +3,7 @@ import { IStory, IUser } from "./types/types";
 
 const BASE_URL = "https://hacker-news.firebaseio.com/v0/";
 
-const getStory = async (id: number) => {
+export const getStory = async (id: number | string) => {
   try {
     const { data: story }: AxiosResponse<IStory, AxiosError> = await axios.get(
       `${BASE_URL}/item/${id}.json`
