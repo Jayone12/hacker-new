@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import styled from "styled-components";
 import BorderLine from "../components/BorderLine";
-import { ReactComponent as UserIconBig } from "../assets/images/user_icon_big.svg";
+import { ReactComponent as UserIcon } from "../assets/images/user_icon.svg";
 import Comments from "../components/Comments";
 import { useQuery } from "@tanstack/react-query";
 import { getStory } from "../apis";
@@ -66,7 +66,7 @@ const Item = () => {
     <Container>
       <Content>
         <UserInfo>
-          <UserIconBig />
+          <UserIcon width="35px" height="35px" />
           <div style={{ marginLeft: "10px" }}>
             <Username>{story?.by}</Username>
             <StoryInfo>
