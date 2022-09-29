@@ -3,6 +3,8 @@ import styled from "styled-components";
 import BorderLine from "../components/BorderLine";
 import { ReactComponent as UserIconBig } from "../assets/images/user_icon_big.svg";
 import Comments from "../components/Comments";
+import { useQuery } from "@tanstack/react-query";
+import { getStory } from "../apis";
 
 const Container = styled.div`
   position: relative;
@@ -41,10 +43,15 @@ const Title = styled.h4`
   margin-top: 20px;
 `;
 
+const Ask = styled.span`
+  color: #ed702d;
+`;
+
 const Description = styled.p`
   font-size: 18px;
   padding: 20px 0;
   line-height: 24px;
+  word-break: break-all;
 `;
 
 const Hr = styled.hr`
@@ -53,6 +60,7 @@ const Hr = styled.hr`
 
 const Item = () => {
   const { id } = useParams();
+  const { data: story, isLoading } = useQuery([id], () => getStory(id!));
 
   return (
     <Container>
@@ -60,25 +68,20 @@ const Item = () => {
         <UserInfo>
           <UserIconBig />
           <div style={{ marginLeft: "10px" }}>
-            <Username>tekno45</Username>
+            <Username>{story?.by}</Username>
             <StoryInfo>
               <Point>97 posints</Point> • <CreatedAt>9 hours ago</CreatedAt>
             </StoryInfo>
           </div>
         </UserInfo>
         <Title>
-          Ask HN: Has anyone gone from software to physical engineering?
+          <Ask>{story?.title.match(/[\w\s]+\:/)}</Ask>
+          {story?.title.replace(/[\w\s]+\:/, "")}
         </Title>
-        <Description>
-          Im feeling burned out and getting interested in machining, materials
-          science and engineering outside of code. Anyone else done this?
-          Thinking of going to school full time to see it through. FYI: I do not
-          have any schooling past highschool. I got really lucky and ended up an
-          SRE after working my way off the helpdesk.
-        </Description>
+        <Description dangerouslySetInnerHTML={{ __html: `${story?.text}` }} />
       </Content>
       <BorderLine />
-      <Comments />
+      <Comments comments={story?.kids} />
     </Container>
   );
 };
