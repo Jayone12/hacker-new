@@ -1,16 +1,15 @@
 import { ReactComponent as CommentIcon } from "../assets/images/comment_icon.svg";
 import styled from "styled-components";
 import Comment from "./Comment";
-import { useParams } from "react-router";
 
 const Container = styled.div`
-  padding: 0 10px;
+  padding: 0 20px;
 `;
 
 const CommentsNav = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 20px 10px 0;
 `;
 
 const CommentsSort = styled.div`
@@ -45,9 +44,7 @@ const CommentsValue = styled.div`
   }
 `;
 
-const Comments = () => {
-  const { id } = useParams();
-
+const Comments = ({ comments }: { comments?: number[] }) => {
   return (
     <Container>
       <CommentsNav>
@@ -63,10 +60,12 @@ const Comments = () => {
         </CommentsSort>
         <CommentsValue>
           <CommentIcon width="12px" />
-          240
+          {comments ? comments.length : 0}
         </CommentsValue>
       </CommentsNav>
-      <Comment />
+      {comments?.map((comment) => (
+        <Comment key={comment} comment={comment} reComment={false} />
+      ))}
     </Container>
   );
 };
