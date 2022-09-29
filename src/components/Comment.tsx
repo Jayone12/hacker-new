@@ -3,16 +3,28 @@ import { ReactComponent as UserIconBig } from "../assets/images/user_icon_big.sv
 import { FiChevronUp } from "react-icons/fi";
 import styled from "styled-components";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getStory } from "../apis";
+import { diffTime } from "../utils/diffTime";
+import ReComment from "./ReComment";
 
-const Container = styled.div`
-  padding: 20px 10px;
-  border-bottom: 1px solid #727272;
+const Container = styled.div<{ reComment: boolean }>`
+  padding-left: ${({ reComment }) => reComment && "10px"};
+`;
+
+const CommentContianer = styled.div<{ reComment: boolean }>`
+  margin-top: 10px;
+  padding-left: 10px;
+  border-radius: 8px;
+  background-color: ${(props) => props.reComment && `${props.theme.commentBg}`};
 `;
 
 const CommentHeader = styled.div`
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  padding: 20px 0;
+  padding-right: 10px;
 `;
 
 const CommentInfo = styled.div`
@@ -40,54 +52,77 @@ const CreatedAt = styled.div`
   }
 `;
 
-const CustomComponent = ({ isActive, ...rest }: { isActive: boolean }) => (
-  <FiChevronUp {...rest} />
-);
-
-const Arrow = styled(CustomComponent)`
-  transform: ${({ isActive }) => isActive && "rotate(-180deg)"};
+const Arrow = styled(FiChevronUp)<{ $isActive: boolean }>`
+  transform: ${({ $isActive }) => $isActive && "rotate(-180deg)"};
   transition: all 0.2s ease-in-out;
 `;
 
 const Description = styled.p`
-  padding-top: 20px;
   font-size: 14px;
   line-height: 20px;
+  padding-bottom: 20px;
+  padding-right: 10px;
+  word-break: break-all;
+  a {
+    text-decoration: underline;
+  }
 `;
 
-const Comment = () => {
+const Hr = styled.hr`
+  border-color: #b7b7b7;
+`;
+
+interface Props {
+  comment: number;
+  reComment: boolean;
+}
+
+const Comment = ({ comment, reComment }: Props) => {
   const [isActive, setIsActive] = useState(false);
 
   const toggleHandler = () => {
     setIsActive((prev) => !prev);
   };
 
+  const { data: story, isLoading } = useQuery([comment], () =>
+    getStory(comment!)
+  );
+
   return (
-    <Container>
-      <CommentHeader onClick={toggleHandler}>
-        <CommentInfo>
-          <User>
-            <UserIconBig width="20px" height="20px" />
-            Jeffreyrogers
-          </User>
-          <CreatedAt>
-            <ClockIcon width="14px" height="14px" />2 hours ago
-          </CreatedAt>
-        </CommentInfo>
-        <Arrow isActive={isActive} />
-      </CommentHeader>
-      {isActive && (
-        <Description>
-          I sort of did this. I went from a software job building web
-          applications to working on radio hardware. The parts I worked on were
-          the FPGAs that did the signal processing. I didn't do any of the board
-          layout or PCB design, but I had to read the schematics and understand
-          how to interface with various things on the board. It was interesting,
-          but I found the work frustrating and the iteration time very long. I
-          eventually went back to software and am happy with that choice.
-        </Description>
+    <>
+      {!story?.deleted && (
+        <Container reComment={reComment}>
+          <CommentContianer reComment={reComment}>
+            <CommentHeader onClick={toggleHandler}>
+              <CommentInfo>
+                <User>
+                  <UserIconBig width="20px" height="20px" />
+                  {story?.by}
+                </User>
+                <CreatedAt>
+                  <ClockIcon width="14px" height="14px" />
+                  {diffTime(story?.time!)}
+                </CreatedAt>
+              </CommentInfo>
+              <Arrow $isActive={isActive} />
+            </CommentHeader>
+            {!isActive && (
+              <Description
+                dangerouslySetInnerHTML={{
+                  __html: `${
+                    story?.text ? story?.text : "[❗️ There is no text.]"
+                  }`,
+                }}
+              />
+            )}
+          </CommentContianer>
+          {!isActive && (
+            <>{story?.kids && <ReComment comments={story?.kids} />}</>
+          )}
+        </Container>
       )}
-    </Container>
+      {!reComment && <Hr />}
+    </>
   );
 };
 export default Comment;
