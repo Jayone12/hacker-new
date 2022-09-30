@@ -3,8 +3,6 @@ import { ReactComponent as UserIcon } from "../assets/images/user_icon.svg";
 import { FiChevronUp } from "react-icons/fi";
 import styled from "styled-components";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getStory } from "../apis";
 import { diffTime } from "../utils/diffTime";
 import ReComment from "./ReComment";
 
@@ -73,35 +71,36 @@ const Hr = styled.hr`
 `;
 
 interface Props {
-  comment: number;
   reComment: boolean;
+  deleted?: boolean;
+  by?: string;
+  time?: number;
+  text?: string;
+  kids?: number[];
+  id?: number;
 }
 
-const Comment = ({ comment, reComment }: Props) => {
+const Comment = ({ reComment, deleted, by, time, text, kids, id }: Props) => {
   const [isActive, setIsActive] = useState(false);
 
   const toggleHandler = () => {
     setIsActive((prev) => !prev);
   };
 
-  const { data: story, isLoading } = useQuery([comment], () =>
-    getStory(comment!)
-  );
-
   return (
     <>
-      {!story?.deleted && (
+      {!deleted && (
         <Container reComment={reComment}>
           <CommentContianer reComment={reComment}>
             <CommentHeader onClick={toggleHandler}>
               <CommentInfo>
                 <User>
                   <UserIcon width="20px" height="20px" />
-                  {story?.by}
+                  {by}
                 </User>
                 <CreatedAt>
                   <ClockIcon width="14px" height="14px" />
-                  {diffTime(story?.time!)}
+                  {diffTime(time!)}
                 </CreatedAt>
               </CommentInfo>
               <Arrow $isActive={isActive} />
@@ -109,15 +108,13 @@ const Comment = ({ comment, reComment }: Props) => {
             {!isActive && (
               <Description
                 dangerouslySetInnerHTML={{
-                  __html: `${
-                    story?.text ? story?.text : "[❗️ There is no text.]"
-                  }`,
+                  __html: `${text ? text : "[❗️ There is no text.]"}`,
                 }}
               />
             )}
           </CommentContianer>
           {!isActive && (
-            <>{story?.kids && <ReComment comments={story?.kids} />}</>
+            <>{kids && <ReComment commentIds={kids} parentId={id} />}</>
           )}
           {!reComment && <Hr />}
         </Container>
