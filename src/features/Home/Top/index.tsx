@@ -32,8 +32,8 @@ const Refresh = styled.div`
 `;
 
 const StoriesContainer = styled.div`
-  position: relative;
   padding-bottom: 10px;
+  margin-bottom: 50px;
 `;
 
 const TopStories = () => {
