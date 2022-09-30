@@ -7,6 +7,7 @@ export const lightTheme: DefaultTheme = {
   storyBg: "#fff",
   lineColor: "#f5f5f5",
   commentBg: "#efefef",
+  tagBg: "#efefef",
 };
 
 export const darkTheme: DefaultTheme = {
@@ -16,6 +17,7 @@ export const darkTheme: DefaultTheme = {
   storyBg: "#343538",
   lineColor: "#35383C",
   commentBg: "#343538",
+  tagBg: "#fff",
 };
 
 export const theme = {
