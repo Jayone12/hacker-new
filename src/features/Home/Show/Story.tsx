@@ -97,7 +97,7 @@ interface Props {
 const Story = ({ by, score, title, time, url, kids }: Props) => {
   return (
     <Container>
-      <SiteUrl>{domainFromUrl(url!)}</SiteUrl>
+      <SiteUrl>{url ? domainFromUrl(url!) : "Empty Url"}</SiteUrl>
       <Title>
         <Show>{title!.substring(0, 8)}</Show>
         {title?.substring(8)}
