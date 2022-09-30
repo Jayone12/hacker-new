@@ -25,6 +25,18 @@ const getUser = async (name: string) => {
   }
 };
 
+export const getComments = async (ids?: number[]) => {
+  try {
+    if (ids === undefined) {
+      return;
+    }
+    const comments = await Promise.all(ids.map(getStory));
+    return comments;
+  } catch (error) {
+    console.log(`Error while getting list of comments.`, error);
+  }
+};
+
 export const getTopStories = async () => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
