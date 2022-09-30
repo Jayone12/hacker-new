@@ -7,6 +7,15 @@ import UserList from "./UserList";
 const Container = styled.div`
   padding-bottom: 50px;
 `;
+
+const Title = styled.h4`
+  font-size: 20px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.fontColor};
+  margin-top: 20px;
+  padding: 0 20px;
+`;
+
 const ListTitles = styled.div`
   display: flex;
   justify-content: space-between;
@@ -33,6 +42,7 @@ const TopUsers = () => {
 
   return (
     <Container>
+      <Title>User Ranking🏆</Title>
       <ListTitles>
         <ListTitle>Rank</ListTitle>
         <ListTitle>User Name</ListTitle>
