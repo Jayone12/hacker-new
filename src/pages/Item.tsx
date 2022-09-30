@@ -9,7 +9,6 @@ import { getStory } from "../apis";
 const Container = styled.div`
   position: relative;
   padding-bottom: 20px;
-  border-top: 1px solid #727272;
   margin-top: 2px;
 `;
 
@@ -52,6 +51,7 @@ const Description = styled.p`
   padding: 20px 0;
   line-height: 24px;
   word-break: break-all;
+  color: #727272;
 `;
 
 const Hr = styled.hr`
@@ -81,7 +81,11 @@ const Item = () => {
         <Description dangerouslySetInnerHTML={{ __html: `${story?.text}` }} />
       </Content>
       <BorderLine />
-      <Comments comments={story?.kids} />
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : (
+        <Comments commentIds={story?.kids} />
+      )}
     </Container>
   );
 };
