@@ -1,4 +1,5 @@
-import { NavLink, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { NavLink, Route, Routes, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TopBanner from "../assets/images/top_banner.png";
 import TopPost from "../features/Top/Post/TopPost";
@@ -7,7 +8,7 @@ import TopUsers from "../features/Top/User/TopUsers";
 const Container = styled.section``;
 
 const ContentConatiner = styled.div`
-  padding: 20px;
+  padding: 20px 0;
 `;
 
 const Banner = styled.div`
@@ -15,9 +16,12 @@ const Banner = styled.div`
 `;
 
 const Kinds = styled.div`
+  width: 340px;
+  margin: 0 auto;
   background-color: ${({ theme }) => theme.storyBg};
   border-radius: 100px;
   padding: 4px 5px;
+  border: 1px solid #b7b7b7;
 `;
 
 const Button = styled.button`
@@ -35,6 +39,12 @@ const Button = styled.button`
 `;
 
 const Top = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    return navigate("/top/post");
+  }, []);
+
   return (
     <Container>
       <Banner>
