@@ -8,6 +8,7 @@ import Stories from "../../../components/Stories";
 
 const Container = styled.div`
   margin-top: 20px;
+  padding: 0 20px;
 `;
 
 const TopPost = () => {
