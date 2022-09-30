@@ -10,5 +10,6 @@ declare module "styled-components" {
     storyBg: string;
     lineColor: string;
     commentBg: string;
+    tagBg: string;
   }
 }
