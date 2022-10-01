@@ -4,6 +4,7 @@ import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg"
 import { ReactComponent as Update } from "../../../assets/images/update_icon.svg";
 import BorderLine from "../../../components/BorderLine";
 import Stories from "./Stories";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   position: relative;
@@ -43,7 +44,9 @@ const ShowStories = () => {
     <Container>
       <TitleContainer>
         <Title>
-          Today's Show <Arrow />
+          <Link to="/show">
+            Today's Show <Arrow />
+          </Link>
         </Title>
         <Refresh>
           <button onClick={() => refetch()}>

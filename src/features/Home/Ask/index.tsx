@@ -4,6 +4,7 @@ import { ReactComponent as Update } from "../../../assets/images/update_icon.svg
 import BorderLine from "../../../components/BorderLine";
 import useAskDataFetch from "./useAskDataFetch";
 import Stories from "./Stories";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   position: relative;
@@ -38,7 +39,9 @@ const AskStories = () => {
     <Container>
       <TitleContainer>
         <Title>
-          Today's Ask <Arrow />
+          <Link to="/ask">
+            Today's Ask <Arrow />
+          </Link>
         </Title>
         <Refresh>
           <button onClick={() => refetch()}>

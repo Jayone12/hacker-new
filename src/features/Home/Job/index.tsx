@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg";
 import Stories from "./Stories";
@@ -32,7 +33,9 @@ const JobStories = () => {
     <Container>
       <TitleContainer>
         <Title>
-          Today's Job <Arrow />
+          <Link to="job">
+            Today's Job <Arrow />
+          </Link>
         </Title>
       </TitleContainer>
       <StoriesContainer>
