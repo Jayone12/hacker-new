@@ -132,7 +132,8 @@ const Story = ({ by, score, title, time, url, kids, id }: Props) => {
           <UserIcon /> {by}
         </User>
         <Comment>
-          <CommentIcon /> {kids ? kids!.length : 0}
+          <CommentIcon />{" "}
+          {kids ? <Link to={`/show/item/${id}`}>{kids!.length}</Link> : 0}
         </Comment>
       </UserInfo>
     </Container>
