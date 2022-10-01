@@ -22,7 +22,7 @@ const Stories = ({ stories, rank }: Props) => {
   return (
     <Container>
       {stories?.map((story, index) => (
-        <Story story={story} index={rank + index} key={story?.id} />
+        <Story {...story} index={rank + index} key={story?.id} />
       ))}
     </Container>
   );
