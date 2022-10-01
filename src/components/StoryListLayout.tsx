@@ -3,7 +3,7 @@ import { ReactComponent as UserIcon } from "../assets/images/user_icon.svg";
 import { ReactComponent as CommentIcon } from "../assets/images/comment_icon.svg";
 import { diffTime } from "../utils/diffTime";
 import domainFromUrl from "../utils/domainFromUrl";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Container = styled.li`
   background-color: ${({ theme }) => theme.storyBg};
@@ -78,6 +78,8 @@ interface Props {
 }
 
 const StoryListLayout = ({ by, title, score, time, kids, url, id }: Props) => {
+  const { pathname } = useLocation();
+
   return (
     <Container>
       {url && <Url>{domainFromUrl(url!)}</Url>}
@@ -96,7 +98,13 @@ const StoryListLayout = ({ by, title, score, time, kids, url, id }: Props) => {
         <CreatedAt>{diffTime(time!)}</CreatedAt>
         <Comment>
           <CommentIcon />
-          {kids ? <Link to={`item/${id}`}>{kids!.length}</Link> : 0}
+          {kids ? (
+            <Link to={`${pathname.match(/\/+[\w\s]+/)}/item/${id}`}>
+              {kids!.length}
+            </Link>
+          ) : (
+            0
+          )}
         </Comment>
       </StoryInfo>
     </Container>
