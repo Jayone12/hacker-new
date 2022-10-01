@@ -3,6 +3,7 @@ import { ReactComponent as UserIcon } from "../assets/images/user_icon.svg";
 import { ReactComponent as CommentIcon } from "../assets/images/comment_icon.svg";
 import { diffTime } from "../utils/diffTime";
 import domainFromUrl from "../utils/domainFromUrl";
+import { Link } from "react-router-dom";
 
 const Container = styled.li`
   background-color: ${({ theme }) => theme.storyBg};
@@ -17,7 +18,7 @@ const Url = styled.span`
   color: #ed702d;
   padding: 3px 5px;
   border-radius: 20px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.tagBg};
 `;
 
 const Title = styled.h4`
@@ -73,13 +74,20 @@ interface Props {
   time?: number;
   kids?: number[];
   url?: string;
+  id?: number;
 }
 
-const StoryListLayout = ({ by, title, score, time, kids, url }: Props) => {
+const StoryListLayout = ({ by, title, score, time, kids, url, id }: Props) => {
   return (
     <Container>
       {url && <Url>{domainFromUrl(url!)}</Url>}
-      <Title>{title}</Title>
+      <Title>
+        {url ? (
+          <a href={url}>{title}</a>
+        ) : (
+          <Link to={`top/item/${id}`}>{title}</Link>
+        )}
+      </Title>
       <StoryInfo>
         <User>
           <UserIcon /> {by}
@@ -88,7 +96,7 @@ const StoryListLayout = ({ by, title, score, time, kids, url }: Props) => {
         <CreatedAt>{diffTime(time!)}</CreatedAt>
         <Comment>
           <CommentIcon />
-          {kids ? <>{kids!.length}</> : 0}
+          {kids ? <Link to={`/top/item/${id}`}>{kids!.length}</Link> : 0}
         </Comment>
       </StoryInfo>
     </Container>
