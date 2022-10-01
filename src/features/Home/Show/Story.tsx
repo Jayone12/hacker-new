@@ -5,6 +5,7 @@ import { ReactComponent as UserIcon } from "../../../assets/images/user_icon.svg
 import { ReactComponent as CommentIcon } from "../../../assets/images/comment_icon.svg";
 import { diffTime } from "../../../utils/diffTime";
 import domainFromUrl from "../../../utils/domainFromUrl";
+import { Link } from "react-router-dom";
 
 const Container = styled.li`
   width: 228px;
@@ -83,6 +84,9 @@ const User = styled.div`
 const Comment = styled.div`
   display: flex;
   align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ed702d;
 `;
 
 interface Props {
@@ -92,15 +96,25 @@ interface Props {
   time?: number;
   url?: string;
   kids?: number[];
+  id?: number;
 }
 
-const Story = ({ by, score, title, time, url, kids }: Props) => {
+const Story = ({ by, score, title, time, url, kids, id }: Props) => {
   return (
     <Container>
       <SiteUrl>{url ? domainFromUrl(url!) : "Empty Url"}</SiteUrl>
       <Title>
-        <Show>{title!.substring(0, 8)}</Show>
-        {title?.substring(8)}
+        {url ? (
+          <a href={url}>
+            <Show>{title!.substring(0, 8)}</Show>
+            {title?.substring(8)}
+          </a>
+        ) : (
+          <Link to={`/show/item/${id}`}>
+            <Show>{title!.substring(0, 8)}</Show>
+            {title?.substring(8)}
+          </Link>
+        )}
       </Title>
       <StoryInfo>
         <Point>
