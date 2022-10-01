@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.li`
@@ -21,14 +22,17 @@ const Ask = styled.span`
 
 interface Props {
   title?: string;
+  id?: number;
 }
 
-const Story = ({ title }: Props) => {
+const Story = ({ title, id }: Props) => {
   return (
     <Container>
       <Title>
-        <Ask>{title!.match(/[\w\s]+\:/)}</Ask>
-        {title!.replace(/[\w\s]+\:/, "")}
+        <Link to={`/ask/item/${id}`}>
+          <Ask>{title!.match(/[\w\s]+\HN:/)}</Ask>
+          {title!.replace(/[\w\s]+\HN:/, "")}
+        </Link>
       </Title>
     </Container>
   );
