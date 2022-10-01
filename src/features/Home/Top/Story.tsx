@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { IStory } from "../../../types/types";
+import { diffTime } from "../../../utils/diffTime";
 
 const Container = styled.li`
   display: flex;
@@ -43,20 +45,31 @@ const UserPoint = styled.span``;
 const CreatedAt = styled.span``;
 
 interface Props {
-  story?: IStory;
+  title?: string;
+  by?: string;
+  score?: number;
+  time?: number;
+  url?: string;
+  id?: number;
   index: number;
 }
 
-const Story = ({ story, index }: Props) => {
+const Story = ({ title, by, score, time, url, id, index }: Props) => {
   return (
     <Container>
       <Rank>{index}</Rank>
       <StoryInfo>
-        <StoryTitle>{story?.title}</StoryTitle>
+        <StoryTitle>
+          {url ? (
+            <a href={url}>{title}</a>
+          ) : (
+            <Link to={`top/item/${id}`}>{title}</Link>
+          )}
+        </StoryTitle>
         <UserInfo>
-          <UserName>{story?.by}</UserName>
-          <UserPoint>{story?.score} point</UserPoint>
-          <CreatedAt>2 minutes ago</CreatedAt>
+          <UserName>{by}</UserName>
+          <UserPoint>{score} point</UserPoint>
+          <CreatedAt>{diffTime(time!)}</CreatedAt>
         </UserInfo>
       </StoryInfo>
     </Container>
