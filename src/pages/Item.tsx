@@ -78,7 +78,11 @@ const Item = () => {
           <Ask>{story?.title.match(/[\w\s]+\:/)}</Ask>
           {story?.title.replace(/[\w\s]+\:/, "")}
         </Title>
-        <Description dangerouslySetInnerHTML={{ __html: `${story?.text}` }} />
+        <Description
+          dangerouslySetInnerHTML={
+            story?.text ? { __html: `${story?.text}` } : { __html: `` }
+          }
+        />
       </Content>
       <BorderLine />
       {isLoading ? (
