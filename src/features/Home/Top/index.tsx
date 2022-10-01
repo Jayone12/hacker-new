@@ -1,4 +1,3 @@
-import useTopDataFetch from "../../../features/Home/Top/useTopDataFetch";
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg";
 import { ReactComponent as Clock } from "../../../assets/images/clock_icon.svg";
@@ -6,6 +5,9 @@ import Carousel from "../../../components/Carousel";
 import Stories from "../../../features/Home/Top/Stories";
 import { useEffect, useState } from "react";
 import BorderLine from "../../../components/BorderLine";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getTopStories } from "../../../apis";
 
 const TopStoriesContainer = styled.div`
   position: relative;
@@ -37,7 +39,9 @@ const StoriesContainer = styled.div`
 `;
 
 const TopStories = () => {
-  const { isLoading, data } = useTopDataFetch();
+  const { data, isLoading } = useQuery(["top"], getTopStories, {
+    refetchInterval: false,
+  });
   const [refreshTime, setRefreshTime] = useState("");
 
   useEffect(() => {
@@ -64,7 +68,9 @@ const TopStories = () => {
     <TopStoriesContainer>
       <TitleContainer>
         <Title>
-          Today's Top <Arrow />
+          <Link to="/top">
+            Today's Top <Arrow />
+          </Link>
         </Title>
         <Refresh>
           <Clock />
