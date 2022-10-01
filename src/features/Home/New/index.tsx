@@ -1,9 +1,11 @@
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { getNewStories } from "../../../apis";
 import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg";
 import { ReactComponent as Update } from "../../../assets/images/update_icon.svg";
 import BorderLine from "../../../components/BorderLine";
 import Stories from "./Stories";
-import useNewDataFetch from "./useNewDataFetch";
 
 const Container = styled.div`
   position: relative;
@@ -35,13 +37,17 @@ const StoriesContainer = styled.div`
 `;
 
 const NewStories = () => {
-  const { data, isLoading, refetch } = useNewDataFetch();
+  const { data, isLoading, refetch } = useQuery(["new"], getNewStories, {
+    refetchInterval: false,
+  });
 
   return (
     <Container>
       <TitleContainer>
         <Title>
-          Today's New <Arrow />
+          <Link to="/new">
+            Today's New <Arrow />
+          </Link>
         </Title>
         <Refresh>
           <button onClick={() => refetch()}>
