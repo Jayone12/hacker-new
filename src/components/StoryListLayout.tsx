@@ -96,7 +96,7 @@ const StoryListLayout = ({ by, title, score, time, kids, url, id }: Props) => {
         <CreatedAt>{diffTime(time!)}</CreatedAt>
         <Comment>
           <CommentIcon />
-          {kids ? <Link to={`/top/item/${id}`}>{kids!.length}</Link> : 0}
+          {kids ? <Link to={`item/${id}`}>{kids!.length}</Link> : 0}
         </Comment>
       </StoryInfo>
     </Container>
