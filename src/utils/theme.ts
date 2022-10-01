@@ -8,6 +8,7 @@ export const lightTheme: DefaultTheme = {
   lineColor: "#f5f5f5",
   commentBg: "#efefef",
   tagBg: "#efefef",
+  borderColor: "#dfdfdf",
 };
 
 export const darkTheme: DefaultTheme = {
@@ -18,6 +19,7 @@ export const darkTheme: DefaultTheme = {
   lineColor: "#35383C",
   commentBg: "#343538",
   tagBg: "#fff",
+  borderColor: "#555",
 };
 
 export const theme = {

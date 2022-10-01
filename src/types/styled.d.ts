@@ -11,5 +11,6 @@ declare module "styled-components" {
     lineColor: string;
     commentBg: string;
     tagBg: string;
+    borderColor: string;
   }
 }
