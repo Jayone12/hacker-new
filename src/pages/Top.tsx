@@ -21,7 +21,7 @@ const Kinds = styled.div`
   background-color: ${({ theme }) => theme.storyBg};
   border-radius: 100px;
   padding: 4px 5px;
-  border: 1px solid #b7b7b7;
+  border: 1px solid ${({ theme }) => theme.borderColor};
 `;
 
 const Button = styled.button`
@@ -32,8 +32,10 @@ const Button = styled.button`
     font-size: 12px;
     text-align: center;
     border-radius: 100px;
+    color: #b7b7b7;
     &.active {
       background-color: #ed702d;
+      color: #fff;
     }
   }
 `;
