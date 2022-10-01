@@ -5,6 +5,8 @@ import { ReactComponent as ClockIcon } from "../assets/images/clock_icon.svg";
 import { ReactComponent as CommentIcon } from "../assets/images/comment_icon.svg";
 import { diffTime } from "../utils/diffTime";
 import domainFromUrl from "../utils/domainFromUrl";
+import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 
 const Container = styled.li`
   background-color: ${({ theme }) => theme.storyBg};
@@ -98,9 +100,12 @@ interface Props {
   time?: number;
   url?: string;
   kids?: number[];
+  id?: number;
 }
 
-const StoryGridLayout = ({ by, title, score, time, url, kids }: Props) => {
+const StoryGridLayout = ({ by, title, score, time, url, kids, id }: Props) => {
+  const { pathname } = useLocation();
+
   return (
     <Container>
       {url ? <Url>{domainFromUrl(url!)}</Url> : <Url>Empty</Url>}
@@ -121,7 +126,13 @@ const StoryGridLayout = ({ by, title, score, time, url, kids }: Props) => {
         </User>
         <Comment>
           <CommentIcon />
-          {kids ? <>{kids!.length}</> : 0}
+          {kids ? (
+            <Link to={`${pathname.match(/\/+[\w\s]+/)}/item/${id}`}>
+              {kids!.length}
+            </Link>
+          ) : (
+            0
+          )}
         </Comment>
       </UserContainer>
     </Container>
