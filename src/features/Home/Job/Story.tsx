@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as ClockIcon } from "../../../assets/images/clock_icon.svg";
 import { diffTime } from "../../../utils/diffTime";
@@ -41,12 +42,19 @@ interface Props {
   title?: string;
   time?: number;
   url?: string;
+  id?: number;
 }
 
-const Story = ({ title, time, url }: Props) => {
+const Story = ({ title, time, url, id }: Props) => {
   return (
     <Container>
-      <Title>{title}</Title>
+      <Title>
+        {url ? (
+          <a href={url}>{title}</a>
+        ) : (
+          <Link to={`/job/item/${id}`}>{title}</Link>
+        )}
+      </Title>
       {url ? <SiteUrl>{domainFromUrl(url!)}</SiteUrl> : null}
       <CreatedAt>
         <ClockIcon />
