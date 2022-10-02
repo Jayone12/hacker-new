@@ -82,13 +82,19 @@ const Comments = ({ commentIds }: { commentIds?: number[] }) => {
           {commentIds ? commentIds.length : 0}
         </CommentsValue>
       </CommentsNav>
-      {sort
-        ? sortComment?.map((comment) => (
-            <Comment key={comment?.id} {...comment} reComment={false} />
-          ))
-        : comments?.map((comment) => (
-            <Comment key={comment?.id} {...comment} reComment={false} />
-          ))}
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : (
+        <>
+          {sort
+            ? sortComment?.map((comment) => (
+                <Comment key={comment?.id} {...comment} reComment={false} />
+              ))
+            : comments?.map((comment) => (
+                <Comment key={comment?.id} {...comment} reComment={false} />
+              ))}
+        </>
+      )}
     </Container>
   );
 };
