@@ -26,10 +26,11 @@ const PagingContainer = styled.div`
 
 interface Props {
   page: number;
+  total?: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Pagination = ({ page, setPage }: Props) => {
+const Pagination = ({ page, total, setPage }: Props) => {
   const handlePrev = () => {
     if (page > 1) {
       setPage(page - 1);
@@ -44,7 +45,9 @@ const Pagination = ({ page, setPage }: Props) => {
   return (
     <PagingContainer>
       <button onClick={handlePrev}>&lt;</button>
-      <span>{page}/9</span>
+      <span>
+        {page}/{total ? total : 9}
+      </span>
       <button onClick={handleNext}>&gt;</button>
     </PagingContainer>
   );
