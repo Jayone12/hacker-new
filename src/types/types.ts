@@ -16,5 +16,6 @@ export interface IUser {
   created: number;
   id: string;
   karma: number;
+  about: string;
   submitted: number[];
 }
