@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as UserIcon } from "../../../assets/images/user_icon.svg";
 import { diffTime } from "../../../utils/diffTime";
@@ -53,7 +54,9 @@ const Story = ({ by, title, time, url }: Props) => {
       </StoryTitle>
       <User>
         <UserIcon />
-        <UserName>{by}</UserName>
+        <UserName>
+          <Link to={`/user/${by}/submissions`}>{by}</Link>
+        </UserName>
       </User>
     </Container>
   );
