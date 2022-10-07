@@ -87,12 +87,13 @@ const StoryListLayout = ({ by, title, score, time, kids, url, id }: Props) => {
         {url ? (
           <a href={url}>{title}</a>
         ) : (
-          <Link to={`top/item/${id}`}>{title}</Link>
+          <Link to={`${pathname.match(/\/+[\w\s]+/)}/item/${id}`}>{title}</Link>
         )}
       </Title>
       <StoryInfo>
         <User>
-          <UserIcon /> {by}
+          <UserIcon />
+          <Link to={`/user/${by}/submissions`}>{by}</Link>
         </User>
         <Score>{score} points</Score>
         <CreatedAt>{diffTime(time!)}</CreatedAt>
