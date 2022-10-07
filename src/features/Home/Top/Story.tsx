@@ -67,7 +67,9 @@ const Story = ({ title, by, score, time, url, id, index }: Props) => {
           )}
         </StoryTitle>
         <UserInfo>
-          <UserName>{by}</UserName>
+          <UserName>
+            <Link to={`/user/${by}/submissions`}>{by}</Link>
+          </UserName>
           <UserPoint>{score} point</UserPoint>
           <CreatedAt>{diffTime(time!)}</CreatedAt>
         </UserInfo>
