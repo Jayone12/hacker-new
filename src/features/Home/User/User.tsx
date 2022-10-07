@@ -2,6 +2,7 @@ import styled from "styled-components";
 import RankIcon from "../../../assets/images/rank_icon_bg.png";
 import { ReactComponent as MoveArrowIcon } from "../../../assets/images/move_arrow.svg";
 import { diffTime } from "../../../utils/diffTime";
+import { Link } from "react-router-dom";
 
 const Container = styled.li`
   width: 228px;
@@ -102,7 +103,9 @@ const User = ({ id, karma, created, index }: Props) => {
           </Karma>
         </UserContainer>
         <MoveIcon>
-          <MoveArrowIcon />
+          <Link to={`/user/${id}/submissions`}>
+            <MoveArrowIcon />
+          </Link>
         </MoveIcon>
       </UserInfo>
     </Container>
