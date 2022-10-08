@@ -6,7 +6,7 @@ const BASE_URL = "https://hacker-news.firebaseio.com/v0/";
 export const getStory = async (id: number | string) => {
   try {
     const { data: story }: AxiosResponse<IStory, AxiosError> = await axios.get(
-      `${BASE_URL}/item/${id}.json`
+      `${BASE_URL}item/${id}.json`
     );
     return story;
   } catch (error) {
@@ -14,7 +14,7 @@ export const getStory = async (id: number | string) => {
   }
 };
 
-const getUser = async (name: string) => {
+export const getUser = async (name: string) => {
   try {
     const { data: user }: AxiosResponse<IUser, AxiosError> = await axios.get(
       `${BASE_URL}user/${name}.json`
@@ -40,7 +40,7 @@ export const getComments = async (ids?: number[]) => {
 export const getTopStories = async () => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/topstories.json`);
+      await axios.get(`${BASE_URL}topstories.json`);
     const stories = await Promise.all(storyIds.slice(0, 15).map(getStory));
     return stories;
   } catch {
@@ -51,7 +51,7 @@ export const getTopStories = async () => {
 export const getNewStories = async () => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/newstories.json`);
+      await axios.get(`${BASE_URL}newstories.json`);
     const stories = await Promise.all(storyIds.slice(0, 4).map(getStory));
     return stories;
   } catch {
@@ -62,7 +62,7 @@ export const getNewStories = async () => {
 export const getBestUsers = async () => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/beststories.json`);
+      await axios.get(`${BASE_URL}beststories.json`);
     const stories = await Promise.all(storyIds.slice(0, 5).map(getStory));
     const users = await Promise.all(stories.map((story) => getUser(story!.by)));
     return users;
@@ -74,7 +74,7 @@ export const getBestUsers = async () => {
 export const getShowStories = async () => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/showstories.json`);
+      await axios.get(`${BASE_URL}showstories.json`);
     const stories = await Promise.all(storyIds.slice(0, 5).map(getStory));
     return stories;
   } catch {
@@ -85,7 +85,7 @@ export const getShowStories = async () => {
 export const getAskStories = async () => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/askstories.json`);
+      await axios.get(`${BASE_URL}askstories.json`);
     const stories = await Promise.all(storyIds.slice(0, 5).map(getStory));
     return stories;
   } catch {
@@ -96,7 +96,7 @@ export const getAskStories = async () => {
 export const getJobStories = async () => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/jobstories.json`);
+      await axios.get(`${BASE_URL}jobstories.json`);
     const stories = await Promise.all(storyIds.slice(0, 5).map(getStory));
     return stories;
   } catch {
@@ -107,7 +107,7 @@ export const getJobStories = async () => {
 export const getTopStory = async (start: number, end: number) => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/topstories.json`);
+      await axios.get(`${BASE_URL}topstories.json`);
     const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
     return stories;
   } catch {
@@ -118,7 +118,7 @@ export const getTopStory = async (start: number, end: number) => {
 export const getTopUsers = async () => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/topstories.json`);
+      await axios.get(`${BASE_URL}topstories.json`);
     const stories = await Promise.all(storyIds.slice(0, 50).map(getStory));
     const users = await Promise.all(stories.map((story) => getUser(story!.by)));
     return users;
@@ -130,7 +130,7 @@ export const getTopUsers = async () => {
 export const getNewStory = async (start: number, end: number) => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/newstories.json`);
+      await axios.get(`${BASE_URL}newstories.json`);
     const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
     return stories;
   } catch {
@@ -141,7 +141,7 @@ export const getNewStory = async (start: number, end: number) => {
 export const getShowStory = async (start: number, end: number) => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/showstories.json`);
+      await axios.get(`${BASE_URL}showstories.json`);
     const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
     return stories;
   } catch {
@@ -152,7 +152,7 @@ export const getShowStory = async (start: number, end: number) => {
 export const getAskStory = async (start: number, end: number) => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/askstories.json`);
+      await axios.get(`${BASE_URL}askstories.json`);
     const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
     return stories;
   } catch {
@@ -163,10 +163,19 @@ export const getAskStory = async (start: number, end: number) => {
 export const getJobStory = async (start: number, end: number) => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}/jobstories.json`);
+      await axios.get(`${BASE_URL}jobstories.json`);
     const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
     return stories;
   } catch {
     console.log("Error while getting list of stories.");
+  }
+};
+
+export const getSubmissions = async (ids: number[]) => {
+  try {
+    const submissions = await Promise.all(ids.map(getStory));
+    return submissions;
+  } catch {
+    console.log("Error while getting submissions.");
   }
 };
