@@ -1,5 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import useBestDataFetch from "./useBestDataFetch";
+import { getBestUsers } from "../../../apis";
 import User from "./User";
 
 const Container = styled.ul`
@@ -11,7 +12,11 @@ const Container = styled.ul`
 `;
 
 const Users = () => {
-  const { data: bestUsers, isLoading } = useBestDataFetch();
+  const {
+    data: bestUsers,
+    isLoading,
+    refetch,
+  } = useQuery(["home", "best"], getBestUsers);
 
   return (
     <Container>
