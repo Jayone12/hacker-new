@@ -3,9 +3,10 @@ import NewBanner from "../assets/images/new_banner.png";
 import LayoutButtons from "../components/LayoutButtons";
 import Pagination from "../components/Pagination";
 import Stories from "../components/Stories";
-import useStoryFetch from "../features/New/useStoryFetch";
+
 import useChangeLayout from "../hooks/useChangeLayout";
 import usePagination from "../hooks/usePagination";
+import useStoryFetch from "../hooks/useStoryFetch";
 
 const Container = styled.section``;
 
@@ -19,12 +20,7 @@ const Banner = styled.div`
 
 const New = () => {
   const [layout, handlechangeLayout] = useChangeLayout();
-  const { limit, page, setPage, offset } = usePagination(1, 10);
-  const { data: stories, isLoading } = useStoryFetch(
-    offset,
-    offset + limit,
-    page
-  );
+  const { data: stories, isLoading, page, setPage } = useStoryFetch("new");
 
   return (
     <Container>
