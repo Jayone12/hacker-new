@@ -1,36 +1,20 @@
-import styled from "styled-components";
 import AskBanner from "../assets/images/ask_banner.png";
 import Pagination from "../components/Pagination";
-import useStoryFetch from "../features/Ask/useStoryFetch";
 import Stories from "../features/Ask/Stories";
-import usePagination from "../hooks/usePagination";
-
-const Container = styled.section``;
-
-const ContentConatiner = styled.div``;
-
-const Banner = styled.div`
-  margin-top: 2px;
-`;
+import Banner from "../components/Banner";
+import useStoryFetch from "../hooks/useStoryFetch";
 
 const Ask = () => {
-  const { limit, page, setPage, offset } = usePagination(1, 10);
-  const { data: stories, isLoading } = useStoryFetch(
-    offset,
-    offset + limit,
-    page
-  );
+  const { data: stories, isLoading, page, setPage } = useStoryFetch("ask");
 
   return (
-    <Container>
-      <Banner>
-        <img src={AskBanner} alt="We're here!" />
-      </Banner>
-      <ContentConatiner>
+    <section>
+      <Banner src={AskBanner} alt="We're here!" />
+      <>
         {isLoading ? <span>Loading...</span> : <Stories stories={stories} />}
         <Pagination page={page} setPage={setPage} />
-      </ContentConatiner>
-    </Container>
+      </>
+    </section>
   );
 };
 export default Ask;
