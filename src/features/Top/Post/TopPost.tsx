@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import useStoryFetch from "../../../hooks/useStoryFetch";
 import Pagination from "../../../components/Pagination";
-import usePagination from "../../../hooks/usePagination";
 import useChangeLayout from "../../../hooks/useChangeLayout";
 import LayoutButtons from "../../../components/LayoutButtons";
 import Stories from "../../../components/Stories";
@@ -13,12 +12,7 @@ const Container = styled.div`
 
 const TopPost = () => {
   const [layout, handlechangeLayout] = useChangeLayout();
-  const { limit, page, setPage, offset } = usePagination(1, 10);
-  const { data: stories, isLoading } = useStoryFetch(
-    offset,
-    offset + limit,
-    page
-  );
+  const { data: stories, isLoading, page, setPage } = useStoryFetch("top");
 
   return (
     <Container>
