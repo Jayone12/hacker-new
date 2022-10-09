@@ -7,12 +7,7 @@ import { useEffect, useState } from "react";
 import BorderLine from "../../../components/BorderLine";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getTopStories } from "../../../apis";
-
-const TopStoriesContainer = styled.div`
-  position: relative;
-  height: 600px;
-`;
+import { getStories } from "../../../apis";
 
 const TitleContainer = styled.div`
   display: flex;
@@ -39,9 +34,7 @@ const StoriesContainer = styled.div`
 `;
 
 const TopStories = () => {
-  const { data, isLoading } = useQuery(["top"], getTopStories, {
-    refetchInterval: false,
-  });
+  const { data, isLoading } = useQuery(["top"], () => getStories("top", 0, 15));
   const [refreshTime, setRefreshTime] = useState("");
 
   useEffect(() => {
@@ -65,7 +58,7 @@ const TopStories = () => {
   }, []);
 
   return (
-    <TopStoriesContainer>
+    <>
       <TitleContainer>
         <Title>
           <Link to="/top">
@@ -89,7 +82,7 @@ const TopStories = () => {
         )}
       </StoriesContainer>
       <BorderLine />
-    </TopStoriesContainer>
+    </>
   );
 };
 export default TopStories;
