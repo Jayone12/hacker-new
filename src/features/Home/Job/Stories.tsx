@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import useJobDataFetch from "./useJobDataFetch";
 import Story from "./Story";
+import { useQuery } from "@tanstack/react-query";
+import { getStories } from "../../../apis";
 
 const Container = styled.ul`
   margin-top: 20px;
@@ -11,7 +13,11 @@ const Container = styled.ul`
 `;
 
 const Stories = () => {
-  const { data: stories, isLoading, refetch } = useJobDataFetch();
+  const {
+    data: stories,
+    isLoading,
+    refetch,
+  } = useQuery(["home", "job"], () => getStories("job", 0, 5));
 
   return (
     <Container>
