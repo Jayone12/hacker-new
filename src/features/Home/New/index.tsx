@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { getNewStories } from "../../../apis";
+import { getNewStories, getStories } from "../../../apis";
 import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg";
 import { ReactComponent as Update } from "../../../assets/images/update_icon.svg";
 import BorderLine from "../../../components/BorderLine";
@@ -37,9 +37,9 @@ const StoriesContainer = styled.div`
 `;
 
 const NewStories = () => {
-  const { data, isLoading, refetch } = useQuery(["new"], getNewStories, {
-    refetchInterval: false,
-  });
+  const { data, isLoading, refetch } = useQuery(["home", "new"], () =>
+    getStories("new", 0, 4)
+  );
 
   return (
     <Container>
