@@ -2,13 +2,10 @@ import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg";
 import { ReactComponent as Update } from "../../../assets/images/update_icon.svg";
 import BorderLine from "../../../components/BorderLine";
-import useAskDataFetch from "./useAskDataFetch";
 import Stories from "./Stories";
 import { Link } from "react-router-dom";
-
-const Container = styled.div`
-  position: relative;
-`;
+import { useQuery } from "@tanstack/react-query";
+import { getAskStories } from "../../../apis";
 
 const TitleContainer = styled.div`
   display: flex;
@@ -34,9 +31,14 @@ const StoriesContainer = styled.div`
 `;
 
 const AskStories = () => {
-  const { data: stories, isLoading, refetch } = useAskDataFetch();
+  const {
+    data: stories,
+    isLoading,
+    refetch,
+  } = useQuery(["home", "ask"], getAskStories);
+
   return (
-    <Container>
+    <div>
       <TitleContainer>
         <Title>
           <Link to="/ask">
@@ -53,7 +55,7 @@ const AskStories = () => {
         {isLoading ? <span>Loading...</span> : <Stories stories={stories} />}
       </StoriesContainer>
       <BorderLine />
-    </Container>
+    </div>
   );
 };
 export default AskStories;
