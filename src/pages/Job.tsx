@@ -1,10 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import { getJobStory } from "../apis";
 import JobBanner from "../assets/images/job_banner.png";
 import Pagination from "../components/Pagination";
+import JobContainer from "../features/Job/JobContiner";
 import Story from "../features/Job/Story";
-import usePagination from "../hooks/usePagination";
+import useStoryFetch from "../hooks/useStoryFetch";
 
 const Container = styled.section``;
 
@@ -17,23 +16,14 @@ const ContentConatiner = styled.ul`
 `;
 
 const Job = () => {
-  const { limit, page, setPage, offset } = usePagination(1, 10);
-  const { data: Stories, isLoading } = useQuery(["jobStory", page], () =>
-    getJobStory(offset, offset + limit)
-  );
+  const { data: stories, isLoading, page, setPage } = useStoryFetch("job");
+  const props = {
+    stories,
+    isLoading,
+    page,
+    setPage,
+  };
 
-  return (
-    <Container>
-      <Banner>
-        <img src={JobBanner} alt="Find Your Ideal Job" />
-      </Banner>
-      <ContentConatiner>
-        {Stories?.map((story) => (
-          <Story key={story?.id} {...story} />
-        ))}
-      </ContentConatiner>
-      <Pagination page={page} setPage={setPage} />
-    </Container>
-  );
+  return <JobContainer {...props} />;
 };
 export default Job;
