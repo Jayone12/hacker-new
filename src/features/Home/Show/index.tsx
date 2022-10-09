@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import useShowDataFetch from "./useShowDataFetch";
 import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg";
 import { ReactComponent as Update } from "../../../assets/images/update_icon.svg";
 import BorderLine from "../../../components/BorderLine";
 import Stories from "./Stories";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getStories } from "../../../apis";
 
 const Container = styled.div`
   position: relative;
@@ -38,7 +39,11 @@ const StoriesContainer = styled.div`
 `;
 
 const ShowStories = () => {
-  const { data: stories, isLoading, refetch } = useShowDataFetch();
+  const {
+    data: stories,
+    isLoading,
+    refetch,
+  } = useQuery(["home", "show"], () => getStories("show", 0, 5));
 
   return (
     <Container>
