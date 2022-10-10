@@ -1,15 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import { getSubmissions } from "../../apis";
-import Pagination from "../../components/Pagination";
-import StoryListLayout from "../../components/StoryListLayout";
-import usePagination from "../../hooks/usePagination";
+import { getSubmissions } from "../../../apis";
+import usePagination from "../../../hooks/usePagination";
+import Submissions from "./Submission";
 
 interface Props {
   ids?: number[];
 }
 
-const Submissions = ({ ids }: Props) => {
+const SubmissionContainer = ({ ids }: Props) => {
   const { name } = useParams();
   const { limit, page, setPage, offset } = usePagination(1, 5);
   const { data: submissions, isLoading } = useQuery(
@@ -27,19 +26,15 @@ const Submissions = ({ ids }: Props) => {
     }
   );
 
-  return (
-    <>
-      {isLoading ? (
-        <span>Loading...</span>
-      ) : (
-        <ul>
-          {submissions?.result?.map((submission) => (
-            <StoryListLayout key={submission?.id} {...submission} />
-          ))}
-        </ul>
-      )}
-      <Pagination page={page} setPage={setPage} total={submissions?.total} />
-    </>
-  );
+  const props = {
+    submissions,
+    isLoading,
+    limit,
+    page,
+    setPage,
+    offset,
+  };
+
+  return <Submissions {...props} />;
 };
-export default Submissions;
+export default SubmissionContainer;
