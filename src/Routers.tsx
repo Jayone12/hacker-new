@@ -7,13 +7,13 @@ import New from "./pages/New";
 import NotFound from "./pages/NotFound";
 import Show from "./pages/Show";
 import Top from "./pages/Top";
-import TopPost from "./features/Top/Post/TopPost";
-import TopUsers from "./features/Top/User/TopUsers";
 import Job from "./pages/Job";
 import User from "./pages/User";
 import Submissions from "./features/User/Submissions";
 import Comments from "./features/User/Comments";
 import Favorites from "./features/User/Favorites";
+import TopPost from "./features/Top/Post";
+import TopUsers from "./features/Top/User";
 
 const Routers = () => {
   return (
