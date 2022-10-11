@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAskStory, getStories } from "../apis";
+import { getStories } from "../apis";
 import usePagination from "./usePagination";
 
 const useStoryFetch = (story: string) => {
