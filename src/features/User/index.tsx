@@ -1,10 +1,10 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import Comments from "../../components/Comments";
 import { IUser } from "../../types/types";
 import { diffTime } from "../../utils/diffTime";
+import CommentContainer from "./Comments";
 import Favorites from "./Favorites";
-import Submissions from "./Submissions";
+import SubmissionContainer from "./Submissions";
 
 const Container = styled.section`
   margin-top: 2px;
@@ -123,11 +123,11 @@ const UserContainer = ({ user, isLoaing }: Props) => {
       <Routes>
         <Route
           path="submissions"
-          element={<Submissions ids={user?.submitted} />}
+          element={<SubmissionContainer ids={user?.submitted} />}
         />
         <Route
           path="comments"
-          element={<Comments commentIds={user?.submitted} />}
+          element={<CommentContainer commentIds={user?.submitted} />}
         />
         <Route path="favorites" element={<Favorites />} />
       </Routes>
