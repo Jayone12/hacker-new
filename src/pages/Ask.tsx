@@ -1,7 +1,3 @@
-import AskBanner from "../assets/images/ask_banner.png";
-import Pagination from "../components/Pagination";
-import Stories from "../features/Ask/Stories";
-import Banner from "../components/Banner";
 import useStoryFetch from "../hooks/useStoryFetch";
 import AskContainer from "../features/Ask";
 
