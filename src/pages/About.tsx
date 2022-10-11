@@ -6,16 +6,14 @@ const Container = styled.section`
   padding: 20px;
 `;
 
-const ContentsContainer = styled.ul``;
-
 const About = () => {
   return (
     <Container>
-      <ContentsContainer>
+      <ul>
         {TEMPLATES.map((content) => (
           <Content key={content.title} {...content} />
         ))}
-      </ContentsContainer>
+      </ul>
     </Container>
   );
 };
