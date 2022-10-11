@@ -37,22 +37,11 @@ export const getComments = async (ids?: number[]) => {
   }
 };
 
-export const getTopStories = async () => {
+export const getStories = async (type: string, start: number, end: number) => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}topstories.json`);
-    const stories = await Promise.all(storyIds.slice(0, 15).map(getStory));
-    return stories;
-  } catch {
-    console.log("Error while getting list of stories.");
-  }
-};
-
-export const getNewStories = async () => {
-  try {
-    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}newstories.json`);
-    const stories = await Promise.all(storyIds.slice(0, 4).map(getStory));
+      await axios.get(`${BASE_URL}${type}stories.json`);
+    const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
     return stories;
   } catch {
     console.log("Error while getting list of stories.");
@@ -71,50 +60,6 @@ export const getBestUsers = async () => {
   }
 };
 
-export const getShowStories = async () => {
-  try {
-    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}showstories.json`);
-    const stories = await Promise.all(storyIds.slice(0, 5).map(getStory));
-    return stories;
-  } catch {
-    console.log("Error while getting list of stories.");
-  }
-};
-
-export const getAskStories = async () => {
-  try {
-    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}askstories.json`);
-    const stories = await Promise.all(storyIds.slice(0, 5).map(getStory));
-    return stories;
-  } catch {
-    console.log("Error while getting list of stories.");
-  }
-};
-
-export const getJobStories = async () => {
-  try {
-    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}jobstories.json`);
-    const stories = await Promise.all(storyIds.slice(0, 5).map(getStory));
-    return stories;
-  } catch {
-    console.log("Error while getting list of stories.");
-  }
-};
-
-export const getTopStory = async (start: number, end: number) => {
-  try {
-    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}topstories.json`);
-    const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
-    return stories;
-  } catch {
-    console.log("Error while getting list of stories.");
-  }
-};
-
 export const getTopUsers = async () => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
@@ -122,50 +67,6 @@ export const getTopUsers = async () => {
     const stories = await Promise.all(storyIds.slice(0, 50).map(getStory));
     const users = await Promise.all(stories.map((story) => getUser(story!.by)));
     return users;
-  } catch {
-    console.log("Error while getting list of stories.");
-  }
-};
-
-export const getNewStory = async (start: number, end: number) => {
-  try {
-    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}newstories.json`);
-    const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
-    return stories;
-  } catch {
-    console.log("Error while getting list of stories.");
-  }
-};
-
-export const getShowStory = async (start: number, end: number) => {
-  try {
-    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}showstories.json`);
-    const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
-    return stories;
-  } catch {
-    console.log("Error while getting list of stories.");
-  }
-};
-
-export const getAskStory = async (start: number, end: number) => {
-  try {
-    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}askstories.json`);
-    const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
-    return stories;
-  } catch {
-    console.log("Error while getting list of stories.");
-  }
-};
-
-export const getJobStory = async (start: number, end: number) => {
-  try {
-    const { data: storyIds }: AxiosResponse<number[], AxiosError> =
-      await axios.get(`${BASE_URL}jobstories.json`);
-    const stories = await Promise.all(storyIds.slice(start, end).map(getStory));
-    return stories;
   } catch {
     console.log("Error while getting list of stories.");
   }
