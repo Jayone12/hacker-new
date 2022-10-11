@@ -15,7 +15,7 @@ const ReComment = ({ commentIds, parentId }: Props) => {
   return (
     <>
       {comments?.map((comment) => (
-        <Comment key={comment?.id} reComment={true} {...comment} />
+        <Comment key={comment?.id} reComment={true} {...comment} exist={true} />
       ))}
     </>
   );

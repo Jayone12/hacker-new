@@ -88,10 +88,20 @@ const Comments = ({ commentIds }: { commentIds?: number[] }) => {
         <>
           {sort
             ? sortComment?.map((comment) => (
-                <Comment key={comment?.id} {...comment} reComment={false} />
+                <Comment
+                  key={comment?.id}
+                  {...comment}
+                  reComment={false}
+                  exist={true}
+                />
               ))
             : comments?.map((comment) => (
-                <Comment key={comment?.id} {...comment} reComment={false} />
+                <Comment
+                  key={comment?.id}
+                  {...comment}
+                  reComment={false}
+                  exist={true}
+                />
               ))}
         </>
       )}

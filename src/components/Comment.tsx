@@ -72,6 +72,7 @@ const Hr = styled.hr`
 
 interface Props {
   reComment: boolean;
+  exist: boolean;
   deleted?: boolean;
   by?: string;
   time?: number;
@@ -80,7 +81,16 @@ interface Props {
   id?: number;
 }
 
-const Comment = ({ reComment, deleted, by, time, text, kids, id }: Props) => {
+const Comment = ({
+  reComment,
+  exist,
+  deleted,
+  by,
+  time,
+  text,
+  kids,
+  id,
+}: Props) => {
   const [isActive, setIsActive] = useState(false);
 
   const toggleHandler = () => {
@@ -114,7 +124,9 @@ const Comment = ({ reComment, deleted, by, time, text, kids, id }: Props) => {
             )}
           </CommentContianer>
           {!isActive && (
-            <>{kids && <ReComment commentIds={kids} parentId={id} />}</>
+            <>
+              {kids && exist && <ReComment commentIds={kids} parentId={id} />}
+            </>
           )}
           {!reComment && <Hr />}
         </Container>
