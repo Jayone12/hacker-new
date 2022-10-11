@@ -9,11 +9,12 @@ import Show from "./pages/Show";
 import Top from "./pages/Top";
 import Job from "./pages/Job";
 import User from "./pages/User";
-import Submissions from "./features/User/Submissions";
-import Comments from "./features/User/Comments";
 import Favorites from "./features/User/Favorites";
 import TopPost from "./features/Top/Post";
 import TopUsers from "./features/Top/User";
+import SubmissionContainer from "./features/User/Submissions";
+import Comments from "./features/User/Comments/Comments";
+import CommentContainer from "./features/User/Comments";
 
 const Routers = () => {
   return (
@@ -35,8 +36,8 @@ const Routers = () => {
       <Route path="/about" element={<About />} />
       <Route path="/user/item/:id" element={<Item />} />
       <Route path="/user/:name/*" element={<User />}>
-        <Route path="submissions" element={<Submissions />} />
-        <Route path="comments" element={<Comments />} />
+        <Route path="submissions" element={<SubmissionContainer />} />
+        <Route path="comments" element={<CommentContainer />} />
         <Route path="favorites" element={<Favorites />} />
       </Route>
       <Route path="/*" element={<NotFound />} />
