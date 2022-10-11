@@ -101,7 +101,7 @@ const Story = ({ title, by, text, score, kids, time, id }: Props) => {
       <StoryInfo>
         <User>
           <UserIcon />
-          {by}
+          <Link to={`/user/${by}/submissions`}>{by}</Link>
           <Point>{score} points</Point>
         </User>
         <Comment>
