@@ -38,7 +38,7 @@ const Pagination = ({ page, total, setPage }: Props) => {
   };
 
   const handleNext = () => {
-    if (page < 9) {
+    if (page < total!) {
       setPage(page + 1);
     }
   };
@@ -46,7 +46,7 @@ const Pagination = ({ page, total, setPage }: Props) => {
     <PagingContainer>
       <button onClick={handlePrev}>&lt;</button>
       <span>
-        {page}/{total ? total : 9}
+        {page}/{total}
       </span>
       <button onClick={handleNext}>&gt;</button>
     </PagingContainer>

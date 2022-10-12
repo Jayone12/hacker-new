@@ -1,40 +1,28 @@
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
-import { getSubmissions } from "../../../apis";
+import Pagination from "../../../components/Pagination";
+import StoryListLayout from "../../../components/StoryListLayout";
 import usePagination from "../../../hooks/usePagination";
-import Submissions from "./Submission";
+import { IStory } from "../../../types/types";
 
 interface Props {
-  ids?: number[];
+  stories?: (IStory | undefined)[];
 }
 
-const SubmissionContainer = ({ ids }: Props) => {
-  const { name } = useParams();
+const SubmissionContainer = ({ stories }: Props) => {
   const { limit, page, setPage, offset } = usePagination(1, 5);
-  const { data: submissions, isLoading } = useQuery(
-    ["submission", name, page],
-    () => getSubmissions(ids!),
-    {
-      select: (submissions) => {
-        const storyFilter = submissions?.filter(
-          (submission) => submission?.type === "story" && !submission?.deleted
-        );
-        const result = storyFilter?.slice(offset, offset + limit);
-        const total = Math.ceil(storyFilter!.length / limit);
-        return { result, total };
-      },
-    }
+
+  return (
+    <>
+      <ul>
+        {stories?.slice(offset, offset + limit).map((story) => (
+          <StoryListLayout key={story?.id} {...story} />
+        ))}
+      </ul>
+      <Pagination
+        page={page}
+        setPage={setPage}
+        total={Math.ceil(stories!.length / limit)}
+      />
+    </>
   );
-
-  const props = {
-    submissions,
-    isLoading,
-    limit,
-    page,
-    setPage,
-    offset,
-  };
-
-  return <Submissions {...props} />;
 };
 export default SubmissionContainer;
