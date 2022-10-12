@@ -1,38 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
-import { getSubmissions } from "../../../apis";
+import Comment from "../../../components/Comment";
+import Pagination from "../../../components/Pagination";
 import usePagination from "../../../hooks/usePagination";
-import Comments from "./Comments";
+import { IStory } from "../../../types/types";
 
 interface Props {
-  commentIds?: number[];
+  comments?: (IStory | undefined)[];
 }
 
-const CommentContainer = ({ commentIds }: Props) => {
-  const { name } = useParams();
+const CommentContainer = ({ comments }: Props) => {
   const { limit, page, setPage, offset } = usePagination(1, 5);
-  const { data: comments, isLoading } = useQuery(
-    ["comments", name, page],
-    () => getSubmissions(commentIds!),
-    {
-      select: (comments) => {
-        const storyFilter = comments?.filter(
-          (comment) => comment?.type === "comment" && !comment?.deleted
-        );
-        const result = storyFilter?.slice(offset, offset + limit);
-        const total = Math.ceil(storyFilter!.length / limit);
-        return { result, total };
-      },
-    }
+
+  return (
+    <>
+      {comments?.slice(offset, offset + limit).map((comment) => (
+        <Comment
+          {...comment}
+          reComment={false}
+          key={comment?.id}
+          exist={false}
+        />
+      ))}
+
+      <Pagination
+        page={page}
+        setPage={setPage}
+        total={Math.ceil(comments!.length / limit)}
+      />
+    </>
   );
-
-  const props = {
-    page,
-    setPage,
-    comments,
-    isLoading,
-  };
-
-  return <Comments {...props} />;
 };
 export default CommentContainer;
