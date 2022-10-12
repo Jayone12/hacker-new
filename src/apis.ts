@@ -74,7 +74,7 @@ export const getTopUsers = async () => {
 
 export const getSubmissions = async (ids: number[]) => {
   try {
-    const submissions = await Promise.all(ids.map(getStory));
+    const submissions = await Promise.all(ids.slice(0, 1000).map(getStory));
     return submissions;
   } catch {
     console.log("Error while getting submissions.");
