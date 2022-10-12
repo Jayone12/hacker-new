@@ -13,7 +13,6 @@ import Favorites from "./features/User/Favorites";
 import TopPost from "./features/Top/Post";
 import TopUsers from "./features/Top/User";
 import SubmissionContainer from "./features/User/Submissions";
-import Comments from "./features/User/Comments/Comments";
 import CommentContainer from "./features/User/Comments";
 
 const Routers = () => {
