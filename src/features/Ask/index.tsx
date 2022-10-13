@@ -5,18 +5,25 @@ import Pagination from "../../components/Pagination";
 import Stories from "./Stories";
 
 interface Props {
-  stories?: (IStory | undefined)[];
+  data?: {
+    stories: (IStory | undefined)[] | undefined;
+    total: number;
+  };
   isLoading: boolean;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const AskContainer = ({ stories, isLoading, page, setPage }: Props) => {
+const AskContainer = ({ data, isLoading, page, setPage }: Props) => {
   return (
     <section>
       <Banner src={askBanner} alt="We're here!" />
-      {isLoading ? <span>Loading...</span> : <Stories stories={stories} />}
-      <Pagination page={page} setPage={setPage} />
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : (
+        <Stories stories={data?.stories} />
+      )}
+      <Pagination page={page} setPage={setPage} total={data?.total} />
     </section>
   );
 };

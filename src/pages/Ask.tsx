@@ -2,9 +2,9 @@ import useStoryFetch from "../hooks/useStoryFetch";
 import AskContainer from "../features/Ask";
 
 const Ask = () => {
-  const { data: stories, isLoading, page, setPage } = useStoryFetch("ask");
+  const { data, isLoading, page, setPage } = useStoryFetch("ask");
   const props = {
-    stories,
+    data,
     isLoading,
     page,
     setPage,
