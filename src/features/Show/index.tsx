@@ -44,9 +44,11 @@ const ShowContent = ({
         {isLoading ? (
           <span>Loading...</span>
         ) : (
-          <Stories layout={layout} stories={data?.stories} />
+          <>
+            <Stories layout={layout} stories={data?.stories} />
+            <Pagination page={page} setPage={setPage} total={data?.total} />
+          </>
         )}
-        <Pagination page={page} setPage={setPage} total={data?.total} />
       </ContentConatiner>
     </section>
   );
