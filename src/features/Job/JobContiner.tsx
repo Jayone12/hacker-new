@@ -10,24 +10,31 @@ const ContentConatiner = styled.ul`
 `;
 
 interface Props {
-  stories?: (IStory | undefined)[];
+  data?: {
+    stories?: (IStory | undefined)[];
+    total: number;
+  };
   isLoading: boolean;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const JobContainer = ({ stories, isLoading, page, setPage }: Props) => {
+const JobContainer = ({ data, isLoading, page, setPage }: Props) => {
   return (
     <section>
       <Banner src={JobBanner} alt="Find Your Ideal Job" />
-      <ContentConatiner>
-        {isLoading ? (
-          <span>Loding...</span>
-        ) : (
-          stories?.map((story) => <Story key={story?.id} {...story} />)
-        )}
-      </ContentConatiner>
-      <Pagination page={page} setPage={setPage} />
+      {isLoading ? (
+        <span>Loding...</span>
+      ) : (
+        <>
+          <ContentConatiner>
+            {data?.stories?.map((story) => (
+              <Story key={story?.id} {...story} />
+            ))}
+          </ContentConatiner>
+          <Pagination page={page} setPage={setPage} total={data?.total} />
+        </>
+      )}
     </section>
   );
 };
