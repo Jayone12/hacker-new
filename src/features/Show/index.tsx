@@ -13,7 +13,10 @@ const ContentConatiner = styled.div`
 interface Props {
   layout: boolean;
   handlechangeLayout: (state: boolean) => void;
-  stories?: (IStory | undefined)[];
+  data?: {
+    stories?: (IStory | undefined)[];
+    total: number;
+  };
   isLoading: boolean;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
@@ -23,7 +26,7 @@ const ShowContent = ({
   layout,
   handlechangeLayout,
   isLoading,
-  stories,
+  data,
   page,
   setPage,
 }: Props) => {
@@ -41,9 +44,9 @@ const ShowContent = ({
         {isLoading ? (
           <span>Loading...</span>
         ) : (
-          <Stories layout={layout} stories={stories} />
+          <Stories layout={layout} stories={data?.stories} />
         )}
-        <Pagination page={page} setPage={setPage} />
+        <Pagination page={page} setPage={setPage} total={data?.total} />
       </ContentConatiner>
     </section>
   );

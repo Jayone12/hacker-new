@@ -5,12 +5,12 @@ import useStoryFetch from "../hooks/useStoryFetch";
 
 const Show = () => {
   const [layout, handlechangeLayout] = useChangeLayout();
-  const { data: stories, isLoading, page, setPage } = useStoryFetch("show");
+  const { data, isLoading, page, setPage } = useStoryFetch("show");
   const props = {
     layout,
     handlechangeLayout,
     isLoading,
-    stories,
+    data,
     page,
     setPage,
   };
