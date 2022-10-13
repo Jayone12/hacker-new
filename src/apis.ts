@@ -37,7 +37,11 @@ export const getComments = async (ids?: number[]) => {
   }
 };
 
-export const getStories = async (type: string, start: number, end: number) => {
+export const getStories = async (
+  type: string,
+  start?: number,
+  end?: number
+) => {
   try {
     const { data: storyIds }: AxiosResponse<number[], AxiosError> =
       await axios.get(`${BASE_URL}${type}stories.json`);
