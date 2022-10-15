@@ -10,6 +10,7 @@ import {
   RefetchOptions,
   RefetchQueryFilters,
 } from "@tanstack/query-core";
+import Skeleton from "../../../components/Skeleton";
 
 const TitleContainer = styled.div`
   display: flex;
@@ -36,6 +37,17 @@ const StoriesContainer = styled.div`
   overflow-x: scroll;
   padding-bottom: 10px;
   height: 300px;
+`;
+
+const SkeletonContainer = styled.ul`
+  width: 350px;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  background-color: ${({ theme }) => theme.storyBg};
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1), 0px 6px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 `;
 
 interface Props {
@@ -65,10 +77,14 @@ const ShowContent = ({ stories, isLoading, isFetching, refetch }: Props) => {
         </Refresh>
       </TitleContainer>
       <StoriesContainer>
-        {isLoading ? (
-          <span>Loading</span>
-        ) : isFetching ? (
-          <span>Refetching...</span>
+        {isLoading || isFetching ? (
+          <SkeletonContainer>
+            {Array(2)
+              .fill(0)
+              .map((skeleton) => (
+                <Skeleton key={skeleton} />
+              ))}
+          </SkeletonContainer>
         ) : (
           <Stories stories={stories} />
         )}

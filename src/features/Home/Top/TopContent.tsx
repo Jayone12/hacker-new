@@ -6,6 +6,7 @@ import Carousel from "../../../components/Carousel";
 import Stories from "./Stories";
 import BorderLine from "../../../components/BorderLine";
 import { IStory } from "../../../types/types";
+import Skeleton from "../../../components/Skeleton";
 
 const TitleContainer = styled.div`
   display: flex;
@@ -29,6 +30,17 @@ const Refresh = styled.div`
 const StoriesContainer = styled.div`
   padding-bottom: 10px;
   margin-bottom: 50px;
+`;
+
+const SkeletonContainer = styled.ul`
+  width: 350px;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  background-color: ${({ theme }) => theme.storyBg};
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1), 0px 6px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 `;
 
 interface Props {
@@ -59,7 +71,13 @@ const TopContent = ({ refreshTime, isLoading, data }: Props) => {
             <Stories stories={data?.slice(10, 15)} rank={11} />
           </Carousel>
         ) : (
-          <span>Loding...</span>
+          <SkeletonContainer>
+            {Array(5)
+              .fill(0)
+              .map((skeleton) => (
+                <Skeleton key={skeleton} />
+              ))}
+          </SkeletonContainer>
         )}
       </StoriesContainer>
       <BorderLine />

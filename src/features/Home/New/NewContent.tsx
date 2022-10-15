@@ -10,6 +10,7 @@ import {
 } from "@tanstack/query-core";
 import { IStory } from "../../../types/types";
 import Stories from "./Stories";
+import Skeleton from "../../../components/Skeleton";
 
 const TitleContainer = styled.div`
   display: flex;
@@ -34,6 +35,17 @@ const StoriesContainer = styled.div`
   position: relative;
   padding: 0 20px;
   padding-bottom: 10px;
+`;
+
+const SkeletonContainer = styled.ul`
+  width: 350px;
+  margin-top: 20px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  background-color: ${({ theme }) => theme.storyBg};
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1), 0px 6px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-bottom: 50px;
 `;
 
 interface Props {
@@ -63,10 +75,14 @@ const NewContent = ({ stories, isLoading, isFetching, refetch }: Props) => {
         </Refresh>
       </TitleContainer>
       <StoriesContainer>
-        {isLoading ? (
-          <span>Loading...</span>
-        ) : isFetching ? (
-          <span>Refetching...</span>
+        {isLoading || isFetching ? (
+          <SkeletonContainer>
+            {Array(4)
+              .fill(0)
+              .map((skeleton) => (
+                <Skeleton key={skeleton} />
+              ))}
+          </SkeletonContainer>
         ) : (
           <Stories stories={stories} />
         )}

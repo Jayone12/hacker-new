@@ -3,6 +3,7 @@ import { IStory } from "../../types/types";
 import askBanner from "../../assets/images/ask_banner.png";
 import Pagination from "../../components/Pagination";
 import Stories from "./Stories";
+import Skeleton from "../../components/Skeleton";
 
 interface Props {
   data?: {
@@ -19,11 +20,19 @@ const AskContainer = ({ data, isLoading, page, setPage }: Props) => {
     <section>
       <Banner src={askBanner} alt="We're here!" />
       {isLoading ? (
-        <span>Loading...</span>
+        <ul>
+          {Array(10)
+            .fill(0)
+            .map((skeleton) => (
+              <Skeleton key={skeleton} />
+            ))}
+        </ul>
       ) : (
-        <Stories stories={data?.stories} />
+        <>
+          <Stories stories={data?.stories} />
+          <Pagination page={page} setPage={setPage} total={data?.total} />
+        </>
       )}
-      <Pagination page={page} setPage={setPage} total={data?.total} />
     </section>
   );
 };

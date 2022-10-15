@@ -3,6 +3,7 @@ import BorderLine from "../../../components/BorderLine";
 import User from "./User";
 import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg";
 import { IUser } from "../../../types/types";
+import Skeleton from "../../../components/Skeleton";
 
 const TitleContainer = styled.div`
   display: flex;
@@ -33,6 +34,17 @@ const UserLists = styled.ul`
   padding-left: 20px;
 `;
 
+const SkeletonContainer = styled.ul`
+  width: 350px;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  background-color: ${({ theme }) => theme.storyBg};
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1), 0px 6px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+`;
+
 interface Props {
   bestUsers?: (IUser | undefined)[];
   isLoading: boolean;
@@ -48,7 +60,13 @@ const Users = ({ bestUsers, isLoading }: Props) => {
       </TitleContainer>
       <StoriesContainer>
         {isLoading ? (
-          <span>Loading...</span>
+          <SkeletonContainer>
+            {Array(2)
+              .fill(0)
+              .map((skeleton) => (
+                <Skeleton key={skeleton} />
+              ))}
+          </SkeletonContainer>
         ) : (
           <UserLists>
             {bestUsers?.map((user, index) => (

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Skeleton from "../../../components/Skeleton";
 import { IUser } from "../../../types/types";
 import UserList from "./UserList";
 
@@ -44,7 +45,13 @@ const UserContent = ({ isLoading, users }: Props) => {
         <ListTitle>Karma</ListTitle>
       </ListTitles>
       {isLoading ? (
-        <span>Loading...</span>
+        <ul>
+          {Array(10)
+            .fill(0)
+            .map((skeleton) => (
+              <Skeleton key={skeleton} />
+            ))}
+        </ul>
       ) : (
         <ul>
           {users?.map((user, index) => (
