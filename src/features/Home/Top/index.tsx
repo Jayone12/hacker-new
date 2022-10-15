@@ -4,7 +4,9 @@ import { getStories } from "../../../apis";
 import TopContent from "./TopContent";
 
 const TopStories = () => {
-  const { data, isLoading } = useQuery(["top"], () => getStories("top", 0, 15));
+  const { data, isLoading } = useQuery(["home", "top"], () =>
+    getStories("top", 0, 15)
+  );
   const [refreshTime, setRefreshTime] = useState("");
 
   const Props = {
