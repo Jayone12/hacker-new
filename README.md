@@ -1,46 +1,54 @@
-# Getting Started with Create React App
+# Hacker news
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+해당 프로젝트는 패스트 캠퍼스의 미니 프로젝트로 진행된 내용입니다.
+리액트로 만든 hacker news 입니다.  
+디자이너 3명이 기획하고 디자인한 내용을 토대로 제작하였습니다.
 
-## Available Scripts
+## 프로젝트 내용
 
-In the project directory, you can run:
+해커 뉴스의 API를 사용하여 디자인에 맞게 제작한 Hacker-news 모바일 버전입니다.
 
-### `npm start`
+## 프로젝트 실행
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+해당 파일 다운로드 한 후
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+npm i
+```
 
-### `npm test`
+```bash
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 사용 기술
 
-### `npm run build`
+- react
+- styled-components
+- react-router-dom
+- react-slick
+- axios
+- react-query
+- typescript
+- react-icons
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 사용 API
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [해커뉴스 api](https://github.com/HackerNews/API)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 개발 내용
 
-### `npm run eject`
+1. VAC 패턴을 사용하여 비즈니스 로직과 view 구분. 
+VAC 패턴으로 비즈니스 로직을 관리하는 컴포넌트에서 props를 객체화 하여 렌더링에 필요한 view 컴포넌트에 전달하는 방식으로 작성하였습니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. react-query를 사용하여 api 데이터 관리.  
+<img src="https://user-images.githubusercontent.com/53748573/195977223-0f07ee0b-e54a-45d4-9b8e-b58625759852.gif" width="213px"/>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 데이터를 캐싱하여 data refetching을 감소.  
+![화면_기록_2022-10-15_오후_5_19_01_AdobeExpress](https://user-images.githubusercontent.com/53748573/196071426-5a7b627a-f9d9-4838-b93b-62c2a1212d30.gif)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+3. react-slick을 사용하여 슬라이드 구현.  
+![화면_기록_2022-10-17_오전_10_42_31_AdobeExpress](https://user-images.githubusercontent.com/53748573/196074608-edec9bb4-ebc3-469c-acfc-744f60295e33.gif)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- custom hook으로 list pagination 구현
+- styled-components를 사용하여 style 및 darkmode 구현
+- api data 호출 동안 skeleton 노출
