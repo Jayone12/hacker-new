@@ -23,8 +23,8 @@ const AskContainer = ({ data, isLoading, page, setPage }: Props) => {
         <ul>
           {Array(10)
             .fill(0)
-            .map((skeleton) => (
-              <Skeleton key={skeleton} />
+            .map((skeleton, index) => (
+              <Skeleton key={skeleton + index} />
             ))}
         </ul>
       ) : (

@@ -4,6 +4,7 @@ import Comment from "./Comment";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getComments } from "../apis";
+import Skeleton from "./Skeleton";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -83,7 +84,13 @@ const Comments = ({ commentIds }: { commentIds?: number[] }) => {
         </CommentsValue>
       </CommentsNav>
       {isLoading ? (
-        <span>Loading...</span>
+        <ul>
+          {Array(10)
+            .fill(0)
+            .map((skeleton, index) => (
+              <Skeleton key={skeleton + index} />
+            ))}
+        </ul>
       ) : (
         <>
           {sort

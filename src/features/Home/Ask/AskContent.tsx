@@ -77,8 +77,8 @@ const AskContent = ({ stories, isLoading, isFetching, refetch }: Props) => {
           <SkeletonContainer>
             {Array(5)
               .fill(0)
-              .map((skeleton) => (
-                <Skeleton key={skeleton} />
+              .map((skeleton, index) => (
+                <Skeleton key={skeleton + index} />
               ))}
           </SkeletonContainer>
         ) : (

@@ -74,8 +74,8 @@ const TopContent = ({ refreshTime, isLoading, data }: Props) => {
           <SkeletonContainer>
             {Array(5)
               .fill(0)
-              .map((skeleton) => (
-                <Skeleton key={skeleton} />
+              .map((skeleton, index) => (
+                <Skeleton key={skeleton + index} />
               ))}
           </SkeletonContainer>
         )}

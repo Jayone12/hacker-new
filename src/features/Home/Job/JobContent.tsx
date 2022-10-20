@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../../assets/images/title_arrow.svg";
+import Skeleton from "../../../components/Skeleton";
 import { IStory } from "../../../types/types";
 import Stories from "./Stories";
 
@@ -25,6 +26,15 @@ const StoriesContainer = styled.div`
   padding-bottom: 10px;
 `;
 
+const SkeletonContainer = styled.ul`
+  margin-top: 20px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1), 0px 6px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-bottom: 50px;
+`;
+
 interface Props {
   stories?: (IStory | undefined)[];
   isLoading: boolean;
@@ -41,7 +51,17 @@ const JobContent = ({ stories, isLoading }: Props) => {
         </Title>
       </TitleContainer>
       <StoriesContainer>
-        {isLoading ? <span>Loading...</span> : <Stories stories={stories} />}
+        {isLoading ? (
+          <SkeletonContainer>
+            {Array(4)
+              .fill(0)
+              .map((skeleton, index) => (
+                <Skeleton key={skeleton + index} />
+              ))}
+          </SkeletonContainer>
+        ) : (
+          <Stories stories={stories} />
+        )}
       </StoriesContainer>
     </>
   );

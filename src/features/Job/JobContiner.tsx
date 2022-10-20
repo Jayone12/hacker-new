@@ -39,8 +39,8 @@ const JobContainer = ({ data, isLoading, page, setPage }: Props) => {
         <SkeletonContainer>
           {Array(10)
             .fill(0)
-            .map((skeleton) => (
-              <Skeleton key={skeleton} />
+            .map((skeleton, index) => (
+              <Skeleton key={skeleton + index} />
             ))}
         </SkeletonContainer>
       ) : (

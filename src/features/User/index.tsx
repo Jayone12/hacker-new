@@ -1,7 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { NavLink, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import { getSubmissions } from "../../apis";
 import { IStory, IUser } from "../../types/types";
 import { diffTime } from "../../utils/diffTime";
 import CommentContainer from "./Comments";
@@ -85,14 +83,13 @@ const Tap = styled.li`
 
 interface Props {
   user?: IUser;
-  isLoaing?: boolean;
   submitted?: {
     stories?: (IStory | undefined)[];
     comments?: (IStory | undefined)[];
   };
 }
 
-const UserContainer = ({ user, isLoaing, submitted }: Props) => {
+const UserContainer = ({ user, submitted }: Props) => {
   return (
     <Container>
       <UserContents>

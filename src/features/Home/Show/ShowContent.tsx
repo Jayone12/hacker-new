@@ -81,8 +81,8 @@ const ShowContent = ({ stories, isLoading, isFetching, refetch }: Props) => {
           <SkeletonContainer>
             {Array(2)
               .fill(0)
-              .map((skeleton) => (
-                <Skeleton key={skeleton} />
+              .map((skeleton, index) => (
+                <Skeleton key={skeleton + index} />
               ))}
           </SkeletonContainer>
         ) : (

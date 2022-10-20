@@ -79,8 +79,8 @@ const NewContent = ({ stories, isLoading, isFetching, refetch }: Props) => {
           <SkeletonContainer>
             {Array(4)
               .fill(0)
-              .map((skeleton) => (
-                <Skeleton key={skeleton} />
+              .map((skeleton, index) => (
+                <Skeleton key={skeleton + index} />
               ))}
           </SkeletonContainer>
         ) : (

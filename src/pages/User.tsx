@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import { getSubmissions, getUser } from "../apis";
+import Skeleton from "../components/Skeleton";
 import UserContainer from "../features/User";
 
 const User = () => {
@@ -25,14 +26,21 @@ const User = () => {
 
   const props = {
     user,
-    isLoading,
     submitted,
   };
 
   if (!isLoading) {
     return <UserContainer {...props} />;
   } else {
-    return <span>Loading...</span>;
+    return (
+      <ul>
+        {Array(10)
+          .fill(0)
+          .map((skeleton, index) => (
+            <Skeleton key={skeleton + index} />
+          ))}
+      </ul>
+    );
   }
 };
 export default User;

@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { ReactComponent as UserIcon } from "../../assets/images/user_icon.svg";
 import BorderLine from "../../components/BorderLine";
 import Comments from "../../components/Comments";
+import Skeleton from "../../components/Skeleton";
 import { IStory } from "../../types/types";
+import { diffTime } from "../../utils/diffTime";
 
 const Container = styled.div`
   position: relative;
@@ -66,7 +68,8 @@ const ItemContainer = ({ story, isLoading }: Props) => {
           <div style={{ marginLeft: "10px" }}>
             <Username>{story?.by}</Username>
             <StoryInfo>
-              <Point>97 posints</Point> • <CreatedAt>9 hours ago</CreatedAt>
+              <Point>{story?.score} points</Point> •{" "}
+              <CreatedAt>{diffTime(story?.time)}</CreatedAt>
             </StoryInfo>
           </div>
         </UserInfo>
@@ -82,7 +85,13 @@ const ItemContainer = ({ story, isLoading }: Props) => {
       </Content>
       <BorderLine />
       {isLoading ? (
-        <span>Loading...</span>
+        <ul>
+          {Array(3)
+            .fill(0)
+            .map((skeleton, index) => (
+              <Skeleton key={skeleton + index} />
+            ))}
+        </ul>
       ) : (
         <Comments commentIds={story?.kids} />
       )}
