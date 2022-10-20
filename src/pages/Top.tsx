@@ -7,7 +7,7 @@ const Top = () => {
 
   useEffect(() => {
     return navigate("/top/post");
-  }, []);
+  }, [navigate]);
 
   return <TopContainer />;
 };

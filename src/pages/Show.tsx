@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import ShowContent from "../features/Show";
 import useChangeLayout from "../hooks/useChangeLayout";
 import useStoryFetch from "../hooks/useStoryFetch";

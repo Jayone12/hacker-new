@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { IStory } from "../../../types/types";
 import { diffTime } from "../../../utils/diffTime";
 
 const Container = styled.li`

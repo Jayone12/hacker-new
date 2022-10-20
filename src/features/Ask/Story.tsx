@@ -91,7 +91,9 @@ const Story = ({ title, by, text, score, kids, time, id }: Props) => {
     <Container>
       <Title>
         <Link to={`item/${id}`}>
+          {/* eslint-disable-next-line */}
           <Ask>{title!.match(/[\w\s]+\:/)}</Ask>
+          {/* eslint-disable-next-line */}
           {title!.replace(/[\w\s]+\:/, "")}
         </Link>
       </Title>

@@ -30,7 +30,9 @@ const Story = ({ title, id }: Props) => {
     <Container>
       <Title>
         <Link to={`/ask/item/${id}`}>
+          {/* eslint-disable-next-line */}
           <Ask>{title!.match(/[\w\s]+\HN:/)}</Ask>
+          {/* eslint-disable-next-line */}
           {title!.replace(/[\w\s]+\HN:/, "")}
         </Link>
       </Title>

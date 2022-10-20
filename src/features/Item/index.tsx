@@ -74,7 +74,9 @@ const ItemContainer = ({ story, isLoading }: Props) => {
           </div>
         </UserInfo>
         <Title>
+          {/* eslint-disable-next-line */}
           <Ask>{story?.title.match(/[\w\s]+\:/)}</Ask>
+          {/* eslint-disable-next-line */}
           {story?.title.replace(/[\w\s]+\:/, "")}
         </Title>
         <Description

@@ -3,10 +3,12 @@ const domainFromUrl = (url: string) => {
   let match;
   if (
     (match = url.match(
+      // eslint-disable-next-line
       /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n\?\=]+)/im
     ))
   ) {
     result = match[1];
+    // eslint-disable-next-line
     if ((match = result.match(/^[^\.]+\.(.+\..+)$/))) {
       result = match[1];
     }
