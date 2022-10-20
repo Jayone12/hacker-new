@@ -4,6 +4,8 @@
 리액트로 만든 hacker news 입니다.  
 디자이너 3명이 기획하고 디자인한 내용을 토대로 제작하였습니다.
 
+[demo](https://master--merry-liger-8936f9.netlify.app/)
+
 ## 프로젝트 내용
 
 해커 뉴스의 API를 사용하여 디자인에 맞게 제작한 Hacker-news 모바일 버전입니다.
