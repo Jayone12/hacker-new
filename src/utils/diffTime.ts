@@ -1,7 +1,7 @@
-export const diffTime = (timestamp: number) => {
+export const diffTime = (timestamp: number | undefined) => {
   const currentTime = Date.now();
   // 해커뉴스의 time은 unix time으로 비교하기 위해 밀리초로 변경한다.
-  const storyTime = timestamp * 1000;
+  const storyTime = timestamp! * 1000;
   // 1000으로 나눠서 밀리초를 초로 바꾸고 60으로 나눠 분으로 바꾼다. (1분은 60초)
   const diff = Math.floor((currentTime - storyTime) / 1000 / 60);
 
